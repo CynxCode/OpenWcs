@@ -1,0 +1,6 @@
+{
+  "name": "OpenWcs",
+  "tagline": "Open-Source Webcam Software",
+  "body": "# OpenWcs\r\n## What's that?\r\nWe're aiming to create a webcam software for linux users and embedded system enthusiasts which is easy to control and easy to setup. Setting up a webcam on a Raspberry for example is a long and exhausting task. Programs and dependencies have to be installed, most programs are already abandoned and the few alternatives don't really have an easy interface and few functions.\r\n## Who's doing that?\r\nMainly Konstantin Papesh (@SydoxX) and Lorenz Kofler (@Ballonen), and of course you!\r\nWe started this project as part of our school education where we have to 'create' something big to show that we learned something in the years we barely passed the courses.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
