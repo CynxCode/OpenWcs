@@ -11,17 +11,25 @@
 
 #include <iostream>
 #include "Poco/LocalDateTime.h"
-#include "Poco/DateTimeFormatter.h"
+#include "Overlay.h"
+#include "DateTimeString.h"
 
 
 using namespace Poco;
+using namespace cv;
 
-
-void putDateOnPicture()
+void Overlay::putDateOnPicture(Mat frame)
 {
-    LocalDateTime now;
-    DateTimeFormatter dateTimeFormatter;
-    std::string stringDate = dateTimeFormatter.format(now, "%W%f%.%n.%Y %H:%M:%S");
+    DateTimeString dateTimeString;
+    std::string stringDate = dateTimeString.getISO();
+
+    Point leftBottom(0, frame.rows);
+    Point rightTop(frame.cols, frame.rows - 35);
+    rectangle(frame, leftBottom, rightTop, Scalar::all(0), CV_FILLED, 8);
+
+    Point textOrg(1, frame.rows - 10);
+    //putText(frame, stringDate, textOrg, FONT_HERSHEY_SIMPLEX, 1, Scalar::all(255), 1, 8);
+    putText(frame, stringDate, textOrg, FONT_HERSHEY_DUPLEX, 1, Scalar::all(255), 1, 8);
 
 }
 

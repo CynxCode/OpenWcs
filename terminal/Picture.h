@@ -21,8 +21,9 @@ class Picture
 public:      //jede class kann die aufrufen
     void snap();
     void save(std::string);
-    void displayDate(bool);
+    void displayDate();
     int init();
+    cv::Mat get();
     enum returnType
     {
         FAIL,
@@ -31,6 +32,7 @@ public:      //jede class kann die aufrufen
 private:    //nur die class Picture darf zugreifen
     cv::VideoCapture _cap;
     cv::Mat _frame;
+
 };
 
 #endif /* Picture_h */

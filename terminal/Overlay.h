@@ -12,10 +12,12 @@
 #ifndef Overlay_h
 #define Overlay_h
 
+#include "opencv2/opencv.hpp"
+
 class Overlay
 {
 public:
-    void putDateOnPicture();
+    void putDateOnPicture(cv::Mat);
 
 private:
 

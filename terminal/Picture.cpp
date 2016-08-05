@@ -9,14 +9,16 @@
 //  See the accompanying file LICENSE or http://www.apache.org/licenses/LICENSE-2.0.html
 //
 
-#include "Poco/DateTime.h"
+
 #include "opencv2/opencv.hpp"
 
+#include "Overlay.h"
 #include "Picture.h"
+#include "DateTimeString.h"
 
 int Picture::init()
 {
-    cv::VideoCapture _cap(0); // open the default camera
+    _cap = 0; // open the default camera TODO: Choose Camera...
     if (_cap.isOpened())  // check if we succeeded
         return OK;
     else
@@ -28,15 +30,27 @@ void Picture::snap()
     _cap >> _frame;
 }
 
-void Picture::save(std::string imgName)
+void Picture::save(std::string name)
 {
-    cv::imwrite(imgName, _frame);
+    if (name.empty()) {
+        DateTimeString dateTimeString;
+        name = dateTimeString.getISO();
+    }
+    std::string imagename = name + ".jpg";
+    imwrite(imagename, _frame);
 }
 
-void Picture::displayDate(bool isSet)
+void Picture::displayDate()
 {
-    Poco::DateTime now;
+    Overlay overlay;
+    overlay.putDateOnPicture(_frame);
 }
+
+cv::Mat Picture::get()
+{
+    return _frame;
+}
+
 
 
 

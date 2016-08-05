@@ -17,6 +17,8 @@
 
 #include "Picture.h"
 
+#include <unistd.h>
+
 using Poco::Util::Application;
 using Poco::Util::Option;
 using Poco::Util::OptionSet;
@@ -72,15 +74,15 @@ protected:
             Option("snapPicture", "P", "snaps a picture and save it to file")
                 .required(false)
                 .repeatable(false)
-                .argument("file")
-                .callback(OptionCallback<SampleApp>(this, &SampleApp::handleSnapPicture)));
+                    .argument("file", false)
+                    .callback(OptionCallback<SampleApp>(this, &SampleApp::handleSnapPicture)));
 
         options.addOption(
-            Option("config-file", "f", "load configuration data from a file")
-                .required(false)
-                .repeatable(true)
-                .argument("file")
-                .callback(OptionCallback<SampleApp>(this, &SampleApp::handleConfig)));
+                Option("config-file", "f", "load configuration data from a file")
+                        .required(false)
+                        .repeatable(true)
+                        .argument("file")
+                        .callback(OptionCallback<SampleApp>(this, &SampleApp::handleConfig)));
 
     }
 
@@ -96,7 +98,9 @@ protected:
         _endExecution = true;
         Picture picture;
         if (picture.init() == picture.OK) {
+            usleep(500000); //TODO: anderen Befehl finden!
             picture.snap();
+            picture.displayDate();
             picture.save(value);
             stopOptionsProcessing();
             std::cout << "Saved " + value + "!" << std::endl;
