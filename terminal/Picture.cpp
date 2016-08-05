@@ -11,6 +11,7 @@
 
 
 #include "opencv2/opencv.hpp"
+#include "Poco/Exception.h"
 
 #include "Overlay.h"
 #include "Picture.h"
@@ -32,11 +33,24 @@ void Picture::snap()
 
 void Picture::save(std::string name)
 {
+    Poco::Exception* pExc = 0;
+    try {
+        if(_frame.empty())
+            throw Poco::LogicException("Frame is empty!");
+    }
+
+    catch(Poco::Exception& exc)
+    {
+        std::cerr << exc.displayText() << std::endl;
+        delete pExc;
+        return;
+    }
+
     if (name.empty()) {
         DateTimeString dateTimeString;
         name = dateTimeString.getISO();
     }
-    std::string imagename = name + ".jpg";
+    std::string imagename = "IMG_" + name + ".jpg";
     imwrite(imagename, _frame);
 }
 

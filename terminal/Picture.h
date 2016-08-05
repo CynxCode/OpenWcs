@@ -18,7 +18,7 @@
 class Picture
 {
 
-public:      //jede class kann die aufrufen
+public:
     void snap();
     void save(std::string);
     void displayDate();
@@ -29,7 +29,8 @@ public:      //jede class kann die aufrufen
         FAIL,
         OK
     };
-private:    //nur die class Picture darf zugreifen
+
+private:
     cv::VideoCapture _cap;
     cv::Mat _frame;
 

@@ -103,7 +103,7 @@ protected:
             picture.displayDate();
             picture.save(value);
             stopOptionsProcessing();
-            std::cout << "Saved " + value + "!" << std::endl;
+
         }
     }
 
