@@ -28,11 +28,6 @@ using Poco::Util::OptionCallback;
 using Poco::AutoPtr;
 
 class SampleApp: public Application
-    /// This sample demonstrates some of the features of the Util::Application class,
-    /// such as configuration file handling and command line arguments processing.
-    ///
-    /// Try SampleApp --help (on Unix platforms) or SampleApp /help (elsewhere) for
-    /// more information.
 {
 public:
     SampleApp()
