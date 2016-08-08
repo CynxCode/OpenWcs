@@ -29,6 +29,5 @@ void Overlay::putDateOnPicture(Mat frame)
 
     Point textOrg(1, frame.rows - 10);
     putText(frame, stringDate, textOrg, FONT_HERSHEY_DUPLEX, 1, Scalar::all(255), 1, 8);
-
 }
 
