@@ -21,7 +21,7 @@ using namespace cv;
 void Overlay::putDateOnPicture(Mat frame)
 {
     DateTimeString dateTimeString;
-    std::string stringDate = dateTimeString.getISO();
+    std::string stringDate = dateTimeString.getISO(true, true);
 
     Point leftBottom(0, frame.rows);
     Point rightTop(frame.cols, frame.rows - 35);

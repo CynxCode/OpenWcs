@@ -5,44 +5,27 @@
 #include <Poco/DateTimeFormatter.h>
 #include "DateTimeString.h"
 
-
-std::string DateTimeString::getISO()
+std::string DateTimeString::_getFormattedTime(std::string format, bool displayInUTC)
 {
-    Poco::DateTime now;
-    return _getISO(now, false, false);
-}
-
-std::string DateTimeString::getISO(Poco::LocalDateTime now)
-{
-    Poco::DateTime dateTime = now.utc();
-    return _getISO(dateTime, false, false);
-}
-
-std::string DateTimeString::getISO(Poco::LocalDateTime now, bool addZulu)
-{
-    Poco::DateTime dateTime = now.utc();
-    return _getISO(dateTime, addZulu, false);
-}
-
-std::string DateTimeString::getISO(Poco::DateTime now)
-{
-    return _getISO(now, true, true);
-}
-
-std::string DateTimeString::_getISO(Poco::DateTime dateTime, bool addZulu, bool inUTC)
-{
-    //Maybe fix this one day.
     Poco::DateTimeFormatter dateTimeFormatter;
+    if (!displayInUTC) {
+        Poco::LocalDateTime now;
+        return dateTimeFormatter.format(now, format);
+    }
+    else {
+        Poco::DateTime dateTime;
+        return dateTimeFormatter.format(dateTime, format);
+    }
+}
+std::string DateTimeString::getISO(bool addZulu, bool displayInUTC)
+{
     std::string zulu;
     if (addZulu)
         zulu = "%z";
-    if (!inUTC) {
-        Poco::LocalDateTime now(dateTime);
-        return dateTimeFormatter.format(now, "%Y%m%dT%H%M%S" + zulu);
-    }
-    else {
-        Poco::DateTime now(dateTime);
-        return dateTimeFormatter.format(now, "%Y%m%dT%H%M%S" + zulu);
-    }
+    return _getFormattedTime("%Y%m%dT%H%M%S" + zulu, displayInUTC);
 }
-//%W%f%.%n.%Y %H:%M:%S TODO: alternative timeformat
+
+std::string DateTimeString::getFancy()
+{
+    return _getFormattedTime("%W%f%.%n.%Y %H:%M:%S", false);
+}
