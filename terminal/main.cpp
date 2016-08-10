@@ -91,15 +91,23 @@ protected:
     void handleSnapPicture(const std::string &name, const std::string &value)
     {
         _endExecution = true;
-        Picture picture;
-        if (picture.init() == picture.OK) {
+
+        try
+        {
+            Picture picture;
             usleep(500000); //TODO: anderen Befehl finden!
             picture.snap();
             picture.displayDate();
             picture.save(value);
-            stopOptionsProcessing();
-
         }
+
+        catch(Poco::Exception& exc)
+        {
+            std::cerr << exc.displayText() << std::endl;
+        }
+        stopOptionsProcessing();
+
+
     }
 
     void handleConfig(const std::string &name, const std::string &value)
