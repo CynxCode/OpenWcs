@@ -19,10 +19,10 @@ class Picture
 {
 
 public:
+    Picture();
     void snap();
     void save(std::string);
     void displayDate();
-    int init();
     cv::Mat get();
     enum returnType
     {

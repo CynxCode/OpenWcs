@@ -17,13 +17,14 @@
 #include "Picture.h"
 #include "DateTimeString.h"
 
-int Picture::init()
+Picture::Picture()
 {
     _cap = 0; // open the default camera TODO: Choose Camera...
-    if (_cap.isOpened())  // check if we succeeded
-        return OK;
-    else
-        return FAIL;
+
+    if(!_cap.isOpened())
+    {
+        throw Poco::ApplicationException("Camera could not be opened!");
+    }
 }
 
 void Picture::snap()
@@ -33,22 +34,13 @@ void Picture::snap()
 
 void Picture::save(std::string name)
 {
-    Poco::Exception* pExc = 0;
-    try {
-        if(_frame.empty())
-            throw Poco::LogicException("Frame is empty!");
-    }
 
-    catch(Poco::Exception& exc)
-    {
-        std::cerr << exc.displayText() << std::endl;
-        delete pExc;
-        return;
-    }
+    if(_frame.empty())
+        throw Poco::LogicException("Frame is empty!");
 
     if (name.empty()) {
         DateTimeString dateTimeString;
-        name = dateTimeString.getISO();
+        name = dateTimeString.getISO(true, true);
     }
     std::string imagename = "IMG_" + name + ".jpg";
     imwrite(imagename, _frame);
@@ -64,6 +56,8 @@ cv::Mat Picture::get()
 {
     return _frame;
 }
+
+
 
 
 
