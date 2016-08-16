@@ -17,7 +17,7 @@
 #include "Picture.h"
 #include "DateTimeString.h"
 
-Picture::Picture()
+Picture::Picture() //initializes the camera
 {
     _cap = 0; // open the default camera TODO: Choose Camera...
 
@@ -27,12 +27,12 @@ Picture::Picture()
     }
 }
 
-void Picture::snap()
+void Picture::snap() //makes a photo
 {
     _cap >> _frame;
 }
 
-void Picture::save(std::string name)
+void Picture::save(std::string name) //saves the picture
 {
 
     if(_frame.empty())
@@ -46,13 +46,13 @@ void Picture::save(std::string name)
     imwrite(imagename, _frame);
 }
 
-void Picture::displayDate()
+void Picture::displayDate() //enables displaying the date on the picture
 {
     Overlay overlay;
     overlay.putDateOnPicture(_frame);
 }
 
-cv::Mat Picture::get()
+cv::Mat Picture::get() 
 {
     return _frame;
 }

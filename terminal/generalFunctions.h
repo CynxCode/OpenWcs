@@ -1,0 +1,12 @@
+//
+// Created by Lorenz Kofler on 16.08.16.
+//
+
+#ifndef OPENWCS_GENERALFUNCTIONS_H
+#define OPENWCS_GENERALFUNCTIONS_H
+
+
+
+
+
+#endif //OPENWCS_GENERALFUNCTIONS_H

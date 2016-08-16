@@ -81,21 +81,21 @@ void MainApp::handleHelp(const std::string &name, const std::string &value)
 }
 
 void MainApp::handleSnapPicture(const std::string &name, const std::string &value)
-{
-    _endExecution = true;
+    {
+        _endExecution = true;
 
-    try {
-        Picture picture;
-        usleep(500000); //TODO: anderen Befehl finden!
-        picture.snap();
-        picture.displayDate();
-        picture.save(value);
-    }
+        try {
+            Picture picture;
+            usleep(500000); //TODO: anderen Befehl finden!
+            picture.snap();
+            picture.displayDate();
+            picture.save(value);
+        }
 
-    catch (Poco::Exception &exc) {
-        std::cerr << exc.displayText() << std::endl;
-    }
-    stopOptionsProcessing();
+        catch (Poco::Exception &exc) {
+            std::cerr << exc.displayText() << std::endl;
+        }
+        stopOptionsProcessing();
 
 }
 
