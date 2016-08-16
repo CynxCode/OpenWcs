@@ -21,7 +21,7 @@ class Picture
 public:
     Picture();
     void snap();
-    void save(std::string);
+    void save(std::string, std::string);
     void displayDate();
     cv::Mat get();
     enum returnType

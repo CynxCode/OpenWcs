@@ -32,7 +32,7 @@ void Picture::snap() //makes a photo
     _cap >> _frame;
 }
 
-void Picture::save(std::string name) //saves the picture
+void Picture::save(std::string path, std::string name) //saves the picture
 {
 
     if(_frame.empty())
@@ -42,7 +42,7 @@ void Picture::save(std::string name) //saves the picture
         DateTimeString dateTimeString;
         name = dateTimeString.getISO(true, true);
     }
-    std::string imagename = "IMG_" + name + ".jpg";
+    std::string imagename = path + "IMG_" + name + ".jpg";
     imwrite(imagename, _frame);
 }
 
