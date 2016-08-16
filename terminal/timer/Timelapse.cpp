@@ -12,13 +12,13 @@
 #include "Timelapse.h"
 #include "Poco/Util/TimerTaskAdapter.h"
 #include "../Picture.h"
-
-#include "Poco/file.h"
+#include "Poco/File.h"
 
 
 Timer::Timelapse::Timelapse(int start, int interval, std::string path, int FPS)
 {
     this->FPS = FPS;
+    this->path = path;
     Poco::Util::TimerTask::Ptr timerTaskCreateTimelapse =
         new Poco::Util::TimerTaskAdapter<Timer::Timelapse>(*this, &Timer::Timelapse::createTimelapse);
     Poco::Util::TimerTask::Ptr
@@ -26,7 +26,7 @@ Timer::Timelapse::Timelapse(int start, int interval, std::string path, int FPS)
 
     setAndCreatePicPath();
     timer.schedule(timerTaskSnapPic, start, interval);
-    timer.schedule(timerTaskCreateTimelapse, start, 1000);
+    timer.schedule(timerTaskCreateTimelapse, start, 100000);
 }
 void Timer::Timelapse::cancelTimer()
 {
@@ -51,8 +51,8 @@ void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
         throw Poco::ApplicationException("Less than 2 pictures in directory!");
 
     std::sort(files.begin(), files.end());
-    std::string name1 = pictures[0].substr(0, 15);
-    std::string name2 = pictures.back().substr(0, 15);
+    std::string name1 = pictures[0].substr(4, 15);
+    std::string name2 = pictures.back().substr(4, 15);
     std::string videoName = name1 + " - " + name2;
 
     std::string fullPathVid = path + videoName + ".avi";
@@ -80,7 +80,7 @@ void Timer::Timelapse::snapPicture(Poco::Util::TimerTask &task)
 
 void Timer::Timelapse::setAndCreatePicPath()
 {
-    picPath = path + "/.pictures";
+    picPath = path + "/.pictures/";
     Poco::File filePicPath(path + "/.pictures");
     filePicPath.createDirectory();
 }
