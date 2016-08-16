@@ -13,18 +13,24 @@
 #define Timelapse_h
 
 #include "Poco/Util/Timer.h"
+#include <iostream>
 
 namespace Timer
 {
 class Timelapse
 {
 public:
-    Timelapse(int, int);
+    Timelapse(int, int, std::string, int);
     void cancelTimer();
 private:
     void createTimelapse(Poco::Util::TimerTask &task);
     void snapPicture(Poco::Util::TimerTask &task);
+    void setAndCreatePicPath();
     Poco::Util::Timer timer;
+    std::string path;
+    std::string picPath;
+    int FPS;
+
 };
 }
 #endif /* Timelapse_h */
