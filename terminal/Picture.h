@@ -33,7 +33,6 @@ public:
 private:
     cv::VideoCapture _cap;
     cv::Mat _frame;
-
 };
 
 #endif /* Picture_h */
