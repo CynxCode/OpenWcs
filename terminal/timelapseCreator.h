@@ -5,6 +5,7 @@
 #ifndef OPENWCS_TIMELAPSCREATOR_H
 #define OPENWCS_TIMELAPSCREATOR_H
 
-void createTimelapse(std::string, std::string, int);
+void createTimelapse(std::string, std::string, std::string, int);
+
 
 #endif //OPENWCS_TIMELAPSCREATOR_H

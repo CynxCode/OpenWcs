@@ -4,30 +4,37 @@
 
 #include "opencv2/opencv.hpp"
 #include "timelapseCreator.h"
-#include <iostream>
+#include <Poco/Exception.h>
+#include  <Poco/File.h>
 
-void createTimelapse(std::string path, std::string fileName, int FPS)
+void createTimelapse(std::string pathPic, std::string pathVid, std::string videoName, int FPS)
 {
+    std::string fullPathVid = pathVid + videoName + ".avi";
     cv::Mat _frame;
     cv::VideoWriter _videoWriter;
     int FCC = CV_FOURCC('M', 'J', 'P', 'G'); //fourcc.org
-    std::string imgNamePrefix = "IMG_";
-    std::string imgNameSuffix = ".jpg";
 
-    fileName = fileName + ".avi";
+    Poco::File allFiles(pathPic);
+    std::vector<std::string> files;
+    allFiles.list(files);
+    std::vector<std::string> pictures;
+    for (std::string e : files) {
+        Poco::File temp(pathPic + e);
+        if (!temp.isHidden() && !temp.isDirectory() && temp.canRead())
+            pictures.push_back(e);
+    }
+    if (pictures.size() < 2)
+        throw Poco::ApplicationException("Less than 2 pictures in directory!");
 
+    std::sort(files.begin(), files.end());
 
-    _frame = cv::imread(imgNamePrefix + "1" + imgNameSuffix); //
-
+    _frame = cv::imread(pathPic + pictures[0]);
     cv::Size frameSize((double)_frame.cols, (double)_frame.rows);
-    _videoWriter.open(fileName, FCC, FPS, frameSize);
+    _videoWriter.open(fullPathVid, FCC, FPS, frameSize);
 
-    for (int i = 1; i++;) {
-        std::string imgName = imgNamePrefix + std::to_string(i) + imgNameSuffix;
-        _frame = cv::imread(imgName);
-        if (_frame.empty()) {
-            break;
-        }
+    for (std::string e : pictures) {
+        _frame = cv::imread(pathPic + e);
         _videoWriter.write(_frame);
     }
 }
+
