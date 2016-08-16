@@ -67,6 +67,10 @@ void MainApp::defineOptions(OptionSet &options)
             .argument("file")
             .callback(OptionCallback<MainApp>(this, &MainApp::handleConfig)));
 
+    options.addOption(
+        Option("cmd-only", "c", "disables the web interface")
+            .required(false)
+            .repeatable(false));
 }
 
 void MainApp::handleHelp(const std::string &name, const std::string &value)
@@ -109,10 +113,14 @@ void MainApp::displayHelp()
     helpFormatter.format(std::cout);
 }
 
+//void MainApp::processInternalCLIOptions(std::string) //TODO: Continue here
+
 int MainApp::main(const ArgVec &args)
 {
     if (!_endExecution) {
-        std::cout << "To be done." << std::endl;
+        std::string input;
+        std::cout << "openwcs>";
+        getline(std::cin, input);
     }
     return Application::EXIT_OK;
 }
