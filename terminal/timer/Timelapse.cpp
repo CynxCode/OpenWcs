@@ -15,20 +15,27 @@
 #include "Poco/File.h"
 
 
-Timer::Timelapse::Timelapse(int start, int interval, std::string path, int FPS)
+Timer::Timelapse::Timelapse(int start, int intervalSnap, int intervalCreate, std::string path, int FPS)
 {
     this->FPS = FPS;
     this->path = path;
-    Poco::Util::TimerTask::Ptr timerTaskCreateTimelapse =
-        new Poco::Util::TimerTaskAdapter<Timer::Timelapse>(*this, &Timer::Timelapse::createTimelapse);
-    Poco::Util::TimerTask::Ptr
-        timerTaskSnapPic = new Poco::Util::TimerTaskAdapter<Timer::Timelapse>(*this, &Timer::Timelapse::snapPicture);
+    this->startTime = start;
+    this->intervalSnap = intervalSnap;
+    this->intervalCreate = intervalCreate;
 
     setAndCreatePicPath();
-    timer.schedule(timerTaskSnapPic, start, interval);
-    timer.schedule(timerTaskCreateTimelapse, start, 100000);
 }
-void Timer::Timelapse::cancelTimer()
+void Timer::Timelapse::start()
+{
+    Poco::Util::TimerTask::Ptr timerTaskCreateTimelapse =
+        new Poco::Util::TimerTaskAdapter<Timelapse>(*this, &Timer::Timelapse::createTimelapse);
+    Poco::Util::TimerTask::Ptr timerTaskSnapPic =
+        new Poco::Util::TimerTaskAdapter<Timelapse>(*this, &Timer::Timelapse::snapPicture);
+
+    timer.schedule(timerTaskSnapPic, startTime, intervalSnap);
+    timer.schedule(timerTaskCreateTimelapse, startTime, intervalCreate);
+}
+void Timer::Timelapse::stop()
 {
     timer.cancel(true);
 }
