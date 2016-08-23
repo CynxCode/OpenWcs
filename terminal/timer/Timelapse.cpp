@@ -9,10 +9,13 @@
 //  See the accompanying file LICENSE or http://www.apache.org/licenses/LICENSE-2.0.html
 //
 
+#include <zconf.h>
 #include "Timelapse.h"
 #include "Poco/Util/TimerTaskAdapter.h"
 #include "../Picture.h"
 #include "Poco/File.h"
+
+#include <unistd.h>
 
 
 Timer::Timelapse::Timelapse(int start, int intervalSnap, int intervalCreate, std::string path, int FPS)
@@ -91,3 +94,4 @@ void Timer::Timelapse::setAndCreatePicPath()
     Poco::File filePicPath(path + "/.pictures");
     filePicPath.createDirectory();
 }
+

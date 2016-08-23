@@ -14,7 +14,7 @@ Video::Video(std::string filename, int fps)
 {
     int fcc = CV_FOURCC('M','J','P','G'); //fourcc.org
 
-    cv::Size frameSize(_cap.get(CV_CAP_PROP_FRAME_WIDTH), _cap.get(CV_CAP_PROP_FRAME_HEIGHT));
+    cv::Size frameSize((int)_cap.get(CV_CAP_PROP_FRAME_WIDTH), (int)_cap.get(CV_CAP_PROP_FRAME_HEIGHT));
     _videoWriter.open(filename,fcc,fps,frameSize);
 
     if(!_videoWriter.isOpened())

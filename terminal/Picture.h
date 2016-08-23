@@ -14,6 +14,7 @@
 
 #include "opencv2/opencv.hpp"
 
+
 // Declaration of Picture class
 class Picture
 {
@@ -33,6 +34,9 @@ public:
 private:
     cv::VideoCapture _cap;
     cv::Mat _frame;
+
+
+
 };
 
 #endif /* Picture_h */

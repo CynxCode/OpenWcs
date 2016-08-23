@@ -105,6 +105,13 @@ void MainApp::handleSnapPicture(const std::string &name, const std::string &valu
         picture.displayDate();
         picture.save(value, "");
     }
+        try {
+            Picture picture;
+            usleep(500000); //TODO: anderen Befehl finden!
+            picture.snap();
+            picture.displayDate();
+            picture.save(value,"");
+        }
 
     catch (Poco::Exception &exc) {
         std::cerr << exc.displayText() << std::endl;
