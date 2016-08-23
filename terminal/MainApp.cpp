@@ -4,10 +4,11 @@
 
 #include "MainApp.h"
 
-#include <iostream>
-#include <sstream>
+#include "Poco/Util/OptionProcessor.h"
+#include "Poco/StringTokenizer.h"
 
 #include "Picture.h"
+#include "timer/Timelapse.h"
 
 #include <unistd.h>
 
@@ -54,7 +55,7 @@ void MainApp::defineOptions(OptionSet &options)
             .callback(OptionCallback<MainApp>(this, &MainApp::handleHelp)));
 
     options.addOption(
-        Option("snapPicture", "P", "snaps a picture and save it to file")
+        Option("snap-picture", "P", "snaps a picture and save it to file")
             .required(false)
             .repeatable(false)
             .argument("file", false)
@@ -71,6 +72,12 @@ void MainApp::defineOptions(OptionSet &options)
         Option("cmd-only", "c", "disables the web interface")
             .required(false)
             .repeatable(false));
+
+    options.addOption(
+        Option("version", "v", "displays the software version")
+            .required(false)
+            .repeatable(false)
+            .callback(OptionCallback<MainApp>(this, &MainApp::handleVersion)));
 }
 
 void MainApp::handleHelp(const std::string &name, const std::string &value)
@@ -80,22 +87,29 @@ void MainApp::handleHelp(const std::string &name, const std::string &value)
     stopOptionsProcessing();
 }
 
+void MainApp::handleVersion(const std::string &name, const std::string &value)
+{
+    _endExecution = true;
+    displayVersion();
+    stopOptionsProcessing();
+}
+
 void MainApp::handleSnapPicture(const std::string &name, const std::string &value)
-    {
-        _endExecution = true;
+{
+    _endExecution = true;
 
-        try {
-            Picture picture;
-            usleep(500000); //TODO: anderen Befehl finden!
-            picture.snap();
-            picture.displayDate();
-            picture.save(value);
-        }
+    try {
+        Picture picture;
+        usleep(500000); //TODO: anderen Befehl finden!
+        picture.snap();
+        picture.displayDate();
+        picture.save(value, "");
+    }
 
-        catch (Poco::Exception &exc) {
-            std::cerr << exc.displayText() << std::endl;
-        }
-        stopOptionsProcessing();
+    catch (Poco::Exception &exc) {
+        std::cerr << exc.displayText() << std::endl;
+    }
+    stopOptionsProcessing();
 
 }
 
@@ -108,19 +122,40 @@ void MainApp::displayHelp()
 {
     HelpFormatter helpFormatter(options());
     helpFormatter.setCommand(commandName());
-    helpFormatter.setUsage("OPTIONS");
+    helpFormatter.setUsage("[FLAGS]");
     helpFormatter.setHeader("An application for webcams");
     helpFormatter.format(std::cout);
 }
 
-//void MainApp::processInternalCLIOptions(std::string) //TODO: Continue here
+void MainApp::displayVersion()
+{
+    std::cout << "OpenWcs v0.1-dev" << std::endl;
+}
+
+void MainApp::processInternalCLIOptions(std::string input)
+{
+    /*Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
+    std::string option = splitInput[0];
+    if(option == "")
+        return;
+    else if(option == "timelapse")
+        //Timer::Timelapse timelapse(0, 2000, "/home/konstantin/Videos/", 20);
+    else if(option == "test2")https://github.com/CynxCode/OpenWcs/settings/branches
+            std::cout << "SSS" << std::endl;
+    else if(option == "quit" || option == "exit")
+        _endExecution = true;
+    else
+        std::cout << "Unknown argument" << std::endl;
+        */
+}
 
 int MainApp::main(const ArgVec &args)
 {
-    if (!_endExecution) {
+    while (!_endExecution) {
         std::string input;
         std::cout << "openwcs>";
         getline(std::cin, input);
+        processInternalCLIOptions(input);
     }
     return Application::EXIT_OK;
 }
