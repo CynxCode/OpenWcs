@@ -25,6 +25,25 @@ MainApp::MainApp()
 {
 }
 
+void MainApp::initialize(Application &self)
+{
+    loadConfiguration(); // load default configuration files, if present
+    Application::initialize(self);
+    // add your own initialization code here
+}
+
+void MainApp::uninitialize()
+{
+    // add your own uninitialization code here
+    Application::uninitialize();
+}
+
+void MainApp::reinitialize(Application &self)
+{
+    Application::reinitialize(self);
+    // add your own reinitialization code here
+}
+
 void MainApp::defineOptions(OptionSet &options)
 {
     Application::defineOptions(options);
