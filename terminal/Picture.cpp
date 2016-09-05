@@ -29,7 +29,15 @@ Picture::Picture() //initializes the camera
 
 void Picture::snap() //makes a photo
 {
+    echoIfVerbose("Snapping picture...");
     _cap >> _frame;
+}
+
+void Picture::echoIfVerbose(std::string msg)
+{
+    if (verbose) {
+        std::cout << msg << std::endl;
+    }
 }
 
 void Picture::save(std::string path, std::string name) //saves the picture
@@ -44,12 +52,18 @@ void Picture::save(std::string path, std::string name) //saves the picture
     }
     std::string imagename = path + "IMG_" + name + ".jpg";
     imwrite(imagename, _frame);
+    echoIfVerbose("Saved " + name + " to " + path + " successfully!");
 }
 
 void Picture::displayDate() //enables displaying the date on the picture
 {
     Overlay overlay;
     overlay.putDateOnPicture(_frame);
+}
+
+void Picture::setVerbose(bool verbose) //Echos steps to the console
+{
+    this->verbose = verbose;
 }
 
 cv::Mat Picture::get() 
