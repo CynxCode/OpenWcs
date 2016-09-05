@@ -141,19 +141,30 @@ void MainApp::displayVersion()
 
 void MainApp::processInternalCLIOptions(std::string input)
 {
-    /*Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
+    Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
     std::string option = splitInput[0];
     if(option == "")
         return;
     else if(option == "timelapse")
-        //Timer::Timelapse timelapse(0, 2000, "/home/konstantin/Videos/", 20);
-    else if(option == "test2")https://github.com/CynxCode/OpenWcs/settings/branches
-            std::cout << "SSS" << std::endl;
+        std::cout << "Starting timelapse..." << std::endl; //Autoptr timelapse = new Timelapse(input)
+    else if (option == "picture") {
+        try {
+            Picture picture;
+            picture.setVerbose(true);
+            usleep(500000); //TODO: anderen Befehl finden!
+            picture.snap();
+            picture.displayDate();
+            picture.save("", "");
+        }
+
+        catch (Poco::Exception &exc) {
+            std::cerr << exc.displayText() << std::endl;
+        }
+    }
     else if(option == "quit" || option == "exit")
         _endExecution = true;
     else
         std::cout << "Unknown argument" << std::endl;
-        */
 }
 
 int MainApp::main(const ArgVec &args)

@@ -14,7 +14,6 @@
 
 #include "opencv2/opencv.hpp"
 
-
 // Declaration of Picture class
 class Picture
 {
@@ -24,6 +23,7 @@ public:
     void snap();
     void save(std::string, std::string);
     void displayDate();
+    void setVerbose(bool verbose);
     cv::Mat get();
     enum returnType
     {
@@ -32,11 +32,10 @@ public:
     };
 
 private:
+    void echoIfVerbose(std::string);
     cv::VideoCapture _cap;
     cv::Mat _frame;
-
-
-
+    bool verbose = false;
 };
 
 #endif /* Picture_h */
