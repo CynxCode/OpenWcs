@@ -15,9 +15,6 @@
 #include "../Picture.h"
 #include "Poco/File.h"
 
-#include <unistd.h>
-
-
 Timer::Timelapse::Timelapse(int start, int intervalSnap, int intervalCreate, std::string path, int FPS)
 {
     this->FPS = FPS;

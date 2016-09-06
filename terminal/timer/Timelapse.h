@@ -14,7 +14,6 @@
 
 #include "Poco/Util/Timer.h"
 #include <iostream>
-#include "Picture.h"
 
 namespace Timer
 {
