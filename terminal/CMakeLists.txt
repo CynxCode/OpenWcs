@@ -10,6 +10,8 @@ set(SOURCE_FILES main.cpp Overlay.cpp Picture.cpp DateTimeString.cpp Video.cpp M
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 link_directories(/usr/local/lib)
+include_directories(/usr/local/opt/opencv3/include)
+link_directories(/usr/local/opt/opencv3/lib)
 add_executable(${TARGET_NAME} ${SOURCE_FILES})
 target_link_libraries(${TARGET_NAME} PocoUtil PocoJSON PocoXML PocoFoundation ${OPENCV_LIBRARIES})
 target_include_directories(${TARGET_NAME} PUBLIC ${OPENCV_INCLUDE_DIRS})

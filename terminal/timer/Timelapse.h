@@ -23,6 +23,7 @@ public:
     Timelapse(int, int, int, std::string, int);
     void start();
     void stop();
+
 private:
     void createTimelapse(Poco::Util::TimerTask &task);
     void snapPicture(Poco::Util::TimerTask &task);
@@ -34,6 +35,7 @@ private:
     int startTime;
     int intervalSnap;
     int intervalCreate;
+
 };
 }
 #endif /* Timelapse_h */
