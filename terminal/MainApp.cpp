@@ -8,7 +8,6 @@
 #include "Poco/StringTokenizer.h"
 
 #include "Picture.h"
-#include "timer/Timelapse.h"
 
 #include <unistd.h>
 
@@ -138,8 +137,13 @@ void MainApp::processInternalCLIOptions(std::string input)
     std::string option = splitInput[0];
     if(option == "")
         return;
-    else if(option == "timelapse")
+    else if (option == "timelapse") {
         std::cout << "Starting timelapse..." << std::endl; //Autoptr timelapse = new Timelapse(input)
+        Poco::SharedPtr<Timer::Timelapse>
+            tempTimelapse(new Timer::Timelapse(0, 5000, 50000, "/home/konstantin/Documents/", 30));
+        tempTimelapse->start();
+        threadVector.addTimelapse("Test", tempTimelapse);
+    }
     else if (option == "picture") {
         try {
             Picture picture;
