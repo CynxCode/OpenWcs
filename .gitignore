@@ -42,5 +42,5 @@ install_manifest.txt
 CTestTestfile.cmake
 
 # CUSTOM
-.build/bin/
 .idea/
+build/
