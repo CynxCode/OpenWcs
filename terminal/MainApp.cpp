@@ -6,6 +6,7 @@
 
 #include "Poco/Util/OptionProcessor.h"
 #include "Poco/StringTokenizer.h"
+#include "Poco/String.h"
 
 #include "Picture.h"
 
@@ -109,7 +110,30 @@ void MainApp::handleSnapPicture(const std::string &name, const std::string &valu
         std::cerr << exc.displayText() << std::endl;
     }
     stopOptionsProcessing();
+}
 
+void MainApp::handleTimelapse(std::string input)
+{
+    input = Poco::toLower(input);
+    Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
+    if (splitInput.count() != 1 && splitInput[1] == "help") {
+        std::cout << "Usage: 'timelapse [start] [intervalSnap] [intervalCreate] [FPS]'" << std::endl;
+        return;
+    }
+    else if (splitInput.count() != 5) {
+        std::cout
+            << "Wrong use of arguments! Use following format: 'timelapse [start] [intervalSnap] [intervalCreate] [FPS]'"
+            << std::endl;
+        return;
+    }
+    int start = std::stoi(splitInput[1]);
+    int intervalSnap = std::stoi(splitInput[2]);
+    int intervalCreate = std::stoi(splitInput[3]);
+    int FPS = std::stoi(splitInput[4]);
+    std::cout << "Starting timelapse..." << std::endl;
+    Poco::SharedPtr<Timer::Timelapse> tempTimelapse(new Timer::Timelapse(start, intervalSnap, intervalCreate, "", FPS));
+    tempTimelapse->start();
+    threadVector.addTimelapse("Test", tempTimelapse);
 }
 
 void MainApp::handleConfig(const std::string &name, const std::string &value)
@@ -138,11 +162,7 @@ void MainApp::processInternalCLIOptions(std::string input)
     if(option == "")
         return;
     else if (option == "timelapse") {
-        std::cout << "Starting timelapse..." << std::endl; //Autoptr timelapse = new Timelapse(input)
-        Poco::SharedPtr<Timer::Timelapse>
-            tempTimelapse(new Timer::Timelapse(0, 5000, 50000, "/home/konstantin/Documents/", 30));
-        tempTimelapse->start();
-        threadVector.addTimelapse("Test", tempTimelapse);
+        handleTimelapse(input);
     }
     else if (option == "picture") {
         try {
