@@ -22,6 +22,7 @@ protected:
     void handleHelp(const std::string &, const std::string &);
     void handleVersion(const std::string &, const std::string &);
     void handleSnapPicture(const std::string &, const std::string &);
+    void handleTimelapse(std::string);
     void handleConfig(const std::string &, const std::string &);
     void displayHelp();
     void displayVersion();
