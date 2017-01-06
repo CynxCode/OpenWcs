@@ -1,6 +1,4 @@
 <!-- https://www.youtube.com/watch?v=oxGmXOKazw0 -->
-
-
 <html>
 <head>
   <title>OpenWCS</title>
@@ -10,21 +8,23 @@
 
 <body>
 
-<div id="header">
-  <div class="logo">
-    <a href="#">Open<span>Wcs</span></a>
+  <div id="header">
+    <div class="logo">
+      <a href="#">Open<span>Wcs</span></a>
+    </div>
+    <a href="index.html"><input type="submit" name="btn_logout" value="Logout" class="btn_logout"></a>
   </div>
-</div>
 
 <div id="container">
 
   <div class="sidebar">
     <ul id="nav">
-      <li><a href="index.html">Dashboard</a></li>
-      <li><a href="settings.html">Settings</a></li>
+      <li><a href="startpage.html">Dashboard</a></li>
       <li><a href="timelapse.html">Timelapse</a></li>
       <li><a class="selected" href="live.html">Live</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="motiondetection.html">Motion Detection</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html"> About</a></li>
   </div>
 
   <div class="content">
@@ -34,11 +34,7 @@
     <div id="box">
       <div class="box-top">Camera 1</div>
       <div class="box-panel">
-        <video width="720" height="480" controls>
-          <source src="movie.mp4" type="video/mp4">
-          <source src="movie.ogg" type="video/ogg">
-            Your browser does not support the video tag.
-        </video>
+        <img src="http://localhost:43295/30">
     </div>
 
 

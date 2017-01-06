@@ -11,21 +11,23 @@
 
 <body>
 
-<div id="header">
-  <div class="logo">
-    <a href="#">Open<span>Wcs</span></a>
+  <div id="header">
+    <div class="logo">
+      <a href="#">Open<span>Wcs</span></a>
+    </div>
+    <a href="index.html"><input type="submit" name="btn_logout" value="Logout" class="btn_logout"></a>
   </div>
-</div>
 
 <div id="container">
 
   <div class="sidebar">
     <ul id="nav">
-      <li><a href="index.html">Dashboard</a></li>
-      <li><a href="settings.html">Settings</a></li>
+      <li><a href="startpage.html">Dashboard</a></li>
       <li><a class="selected" href="timelapse.html">Timelapse</a></li>
       <li><a href="live.html">Live</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="motiondetection.html">Motion Detection</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html"> About</a></li>
     </ul>
   </div>
 
@@ -35,23 +37,30 @@
     <div id="box">
       <div class="box-top">Create Timelapse:</div>
       <div class="box-panel">
+        <form action="">
+          <p>Start Time:</p>
+          <p><input type="datetime-local" id="start_time" name="start_time" step="1"</p>
+          <p>Picture Intervall</p>
+          <p><input type="time" id="intervalSnap" name="intervalSnap" value="00:00:00" step="1"></p>
+          <p>End Time:</p>
+          <p><input type="datetime-local" id="end_time" name="end_time" value= "2017-00-00 00:00:00" step="1"</p>
+          <p>FPS:</p>
+          <p><select  type="number">
+            </select>
+          </p>
 
-        <form name="hongkiat" id="hongkiat-form" method="post" action="#">
-          <div id="wrapping" class="clearfix">
-            <section id="aligned">
-              <input type="text" name="name" id="name" placeholder="Start time" autocomplete="off" tabindex="1" class="txtinput">
-              <input type="email" name="email" id="email" placeholder="End time" autocomplete="off" tabindex="2" class="txtinput">
-              <input type="url" name="website" id="website" placeholder="FPS" autocomplete="off" tabindex="3" class="txtinput">
-              <input type="tel" name="telephone" id="telephone" placeholder="??" tabindex="4" class="txtinput">
-          </div>
-
+          <input type="submit" name="btn_start_timelapse" value="Start Timelapse" class="btn_start_timelapse">
         </form>
-        <span>
+        </form>
+        </form>
+
+
+      </div>
+
+
+
+
     </div>
-
-
-
-  </div>
 
 
 
