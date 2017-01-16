@@ -13,7 +13,7 @@ Programs and dependencies have to be installed, most programs are already abando
 2. Clone your fork of the repository locally
 
   ```
-  git clone git://github.com/USERNAME/hifi.git
+  git clone git://github.com/USERNAME/OpenWcs.git
   ```
 3. Create a new branch
   
@@ -27,7 +27,7 @@ Programs and dependencies have to be installed, most programs are already abando
 6. Update your branch
   
   ```
-  git remote add upstream https://github.com/highfidelity/hifi
+  git remote add upstream https://github.com/CynxCode/OpenWcs
   git pull upstream master
   ```
   
