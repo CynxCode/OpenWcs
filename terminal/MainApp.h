@@ -24,6 +24,7 @@ protected:
     void handleSnapPicture(const std::string &, const std::string &);
     void handleTimelapse(std::string);
     void handleConfig(const std::string &, const std::string &);
+    void handleWebInterface(const std::string &, const std::string &);
     void displayHelp();
     void displayVersion();
     void processInternalCLIOptions(std::string);
@@ -31,6 +32,7 @@ protected:
 
 private:
     bool _endExecution;
+    bool _enableWebInterface;
     ThreadVector threadVector;
 };
 

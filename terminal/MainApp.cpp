@@ -9,8 +9,7 @@
 #include "Poco/String.h"
 
 #include "Picture.h"
-
-#include <unistd.h>
+#include "webserver/HTTPServerApplication.h"
 
 using Poco::Util::Application;
 using Poco::Util::Option;
@@ -21,7 +20,7 @@ using Poco::Util::OptionCallback;
 using Poco::AutoPtr;
 
 MainApp::MainApp()
-    : _endExecution(false)
+    : _endExecution(false), _enableWebInterface(true)
 {
 }
 
@@ -71,7 +70,8 @@ void MainApp::defineOptions(OptionSet &options)
     options.addOption(
         Option("cmd-only", "c", "disables the web interface")
             .required(false)
-            .repeatable(false));
+            .repeatable(false)
+            .callback(OptionCallback<MainApp>(this, &MainApp::handleWebInterface)));
 
     options.addOption(
         Option("version", "v", "displays the software version")
@@ -136,6 +136,11 @@ void MainApp::handleTimelapse(std::string input)
     threadVector.addTimelapse("Test", tempTimelapse);
 }
 
+void MainApp::handleWebInterface(const std::string &name, const std::string &value)
+{
+    _enableWebInterface = false;
+}
+
 void MainApp::handleConfig(const std::string &name, const std::string &value)
 {
     loadConfiguration(value); //TODO: Load configuration
@@ -186,6 +191,9 @@ void MainApp::processInternalCLIOptions(std::string input)
 
 int MainApp::main(const ArgVec &args)
 {
+    Poco::SharedPtr<HTTPServerApplication> httpServer;
+    if (_enableWebInterface)
+        httpServer = new HTTPServerApplication(9000);
     while (!_endExecution) {
         std::string input;
         std::cout << "openwcs>";
