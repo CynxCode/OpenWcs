@@ -42,6 +42,7 @@ void Picture::echoIfVerbose(std::string msg)
 
 void Picture::save(std::string path, std::string name) //saves the picture
 {
+    std::string imagename;
 
     if(_frame.empty())
         throw Poco::LogicException("Frame is empty!");
@@ -49,8 +50,11 @@ void Picture::save(std::string path, std::string name) //saves the picture
     if (name.empty()) {
         DateTimeString dateTimeString;
         name = dateTimeString.getISO(true, true);
+        imagename = path + "IMG_" + name + ".jpg";
     }
-    std::string imagename = path + "IMG_" + name + ".jpg";
+    else{
+        imagename = path + name + ".jpg";
+    }
     imwrite(imagename, _frame);
     echoIfVerbose("Saved " + name + " to " + path + " successfully!");
 }
