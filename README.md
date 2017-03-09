@@ -1,7 +1,7 @@
 # OpenWcs
-Open-Source Webcam Software
+![OpenWcs Logo](logo.png)
 
-Created by Konstantin Papesh (@SydoxX) & Lorenz Kofler (@Ballonen)
+Created by Konstantin Papesh ( @SydoxX ) & Lorenz Kofler ( @Ballonen )
 
 ## What's that?
 We're aiming to create a webcam software for linux users and embedded system enthusiasts which is easy to control and easy to setup.
@@ -13,7 +13,7 @@ Programs and dependencies have to be installed, most programs are already abando
 2. Clone your fork of the repository locally
 
   ```
-  git clone git://github.com/USERNAME/hifi.git
+  git clone git://github.com/USERNAME/OpenWcs.git
   ```
 3. Create a new branch
   
