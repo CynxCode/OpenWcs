@@ -59,7 +59,7 @@ void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
     std::string videoName = startName + " - " + endName;
     std::string fullPathVid = _path + videoName + ".avi";
 
-    _frame = cv::imread(_picPath + "1" + ".jpg");
+    _frame = cv::imread(_picPath + "0" + ".jpg");
     cv::Size frameSize( _frame.cols, _frame.rows);
     _videoWriter.open(fullPathVid, FCC, _FPS, frameSize,true);
 

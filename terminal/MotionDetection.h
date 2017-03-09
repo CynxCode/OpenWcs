@@ -24,6 +24,8 @@ private:
     cv::VideoCapture _cap;
     bool _motionDetected();
     bool _motion;
+    std::string _path;
+    std::string _picPath;
 
 };
 }
