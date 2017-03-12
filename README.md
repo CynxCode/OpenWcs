@@ -27,7 +27,7 @@ Programs and dependencies have to be installed, most programs are already abando
 6. Update your branch
   
   ```
-  git remote add upstream https://github.com/highfidelity/hifi
+  git remote add upstream https://github.com/CynxCode/OpenWcs
   git pull upstream master
   ```
   

@@ -34,7 +34,7 @@
     <div id="box">
       <div class="box-top">Camera 1</div>
       <div class="box-panel">
-        <img src="http://localhost:43295/30">
+        <div id="cameraimage"></div>
     </div>
 
 
@@ -45,7 +45,13 @@
 
 </div>
 
-
+<script type="text/javascript">
+    var elem = document.createElement("img");
+    var ip = location.host;
+    var fullAddress = "http://" + ip + ":9000/30";
+    elem.src = fullAddress;
+    document.getElementById("cameraimage").appendChild(elem);
+</script>
 </body>
 
 
