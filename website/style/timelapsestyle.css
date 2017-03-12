@@ -1,0 +1,28 @@
+
+
+input[type="text"],[type="datetime-local"],[type="time"], [type="number"]{
+  margin-top: 5px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  height: 45px;
+  width: 50%;
+  font-size: 20px;
+  background-color: #fff;
+  padding-left: 5px;
+  border-radius: 5px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.btn_submit{
+  margin-top: 20px;
+  padding: 15px 25px;
+  color: #fff;
+  background-color: #171717;
+  border-radius: 4px;
+  border: none;
+  font-size: 20px;
+}
+
+ul#inf {
+  font-size: 20px;
+}
