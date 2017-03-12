@@ -1,18 +1,17 @@
 <?php
 $username = $_POST["username"];
 $password = $_POST["password"];
+$pass = hash ( "sha256" , $password , false );
 
-$pass = sha1($password); 
-
-echo $pass;
-
-if($username == "Admin" AND $pass=="8be3c943b1609fffbfc51aad666d0a04adf83c9d")
+if($username == "Admin" AND $pass=="e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a")
    {
-   header("location: startpage.html");
+  session_start();
+  $_SESSION['login_user'] = true;
+   header("location: startpage.php");
    }
 else
    {
-   header("location: login_false.html");
+   header("location: login_false.php");
+   session_destroy();
    }
-
 ?>

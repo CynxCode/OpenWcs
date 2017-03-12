@@ -3,6 +3,7 @@
 //
 #include "opencv2/opencv.hpp"
 #include "Picture.h"
+#include "Poco/File.h"
 
 
 #include "MotionDetection.h"
@@ -14,6 +15,10 @@ Timer::MotionDetection::MotionDetection() //initatilizes the videocapture
     if (!_cap.isOpened()) {
         throw Poco::ApplicationException("Camera could not be opened!");
     }
+
+    _picPath = _path + ".motiondetection/";
+    Poco::File filePicPath(_picPath);
+    filePicPath.createDirectory();
 
 }
 
@@ -44,12 +49,15 @@ void Timer::MotionDetection::check()
             Picture picture;
             picture.snap();
             picture.displayDate();
-            _pic = picture.get();
+            picture.save(_picPath, "");
         }
         catch (Poco::Exception &exc) {
             std::cerr << exc.displayText() << std::endl;
         }
 
         //send Email
+
+        //...
+        //filePicPath.remove(1);
     }
 }
