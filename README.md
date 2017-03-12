@@ -1,7 +1,7 @@
 # OpenWcs
-Open-Source Webcam Software
+![OpenWcs Logo](logo.png)
 
-Created by Konstantin Papesh (@SydoxX) & Lorenz Kofler (@Ballonen)
+Created by Konstantin Papesh ( @SydoxX ) & Lorenz Kofler ( @Ballonen )
 
 ## What's that?
 We're aiming to create a webcam software for linux users and embedded system enthusiasts which is easy to control and easy to setup.

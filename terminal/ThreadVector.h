@@ -21,8 +21,9 @@ public:
     void addTimelapse(std::string, Poco::SharedPtr<Timer::Timelapse>);
     //void removeTimelapse(int);
     //Timer::Timelapse getTimelapse(int);
+    std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> getTimelapseVector();
 private:
-    std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> _timelapseVector;
+    static std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> _timelapseVector;
 };
 
 
