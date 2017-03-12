@@ -12,8 +12,7 @@
 #include "Timelapse.h"
 #include "Poco/Util/TimerTaskAdapter.h"
 #include "../Picture.h"
-#include "Poco/File.h"
-#include "../DateTimeString.h"
+#include "../ThreadVector.h"
 
 Timer::Timelapse::Timelapse(int start, int intervalSnap, int intervalCreate, std::string path, int FPS)
 {
@@ -38,15 +37,22 @@ void Timer::Timelapse::start()
 
     DateTimeString getStartDate;
     _startDate = getStartDate.getISO(true,true);
-
 }
 void Timer::Timelapse::stop()
 {
     _timer.cancel(true);
 }
+void Timer::Timelapse::setName(std::string tName)
+{
+    this->_name = tName;
+}
+std::string Timer::Timelapse::getName()
+{
+    return this->_name;
+}
 void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
 {
-
+    static ThreadVector threadVector;
     DateTimeString getEndDate;
     _endDate = getEndDate.getISO(true,true);
 
@@ -71,6 +77,7 @@ void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
 
     Poco::File delPath(_path + ".pictures");
     delPath.remove(1);  //removes .pictures Folder
+    threadVector.removeTimelapse(this);
     stop(); //stops timer
 }
 void Timer::Timelapse::snapPicture(Poco::Util::TimerTask &task)

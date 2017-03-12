@@ -11,15 +11,22 @@
 
 #include <Poco/DateTimeFormatter.h>
 
-std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> ThreadVector::_timelapseVector;
+std::vector<Poco::SharedPtr<Timer::Timelapse>> ThreadVector::_timelapseVector;
 
-void ThreadVector::addTimelapse(std::string name, Poco::SharedPtr<Timer::Timelapse> timelapse)
+void ThreadVector::addTimelapse(Poco::SharedPtr<Timer::Timelapse> timelapse)
 {
-    DateTimeString dateTimeString;
-    std::string tempTime = dateTimeString.getISO(false, false);
-    _timelapseVector.push_back(std::make_tuple(name, timelapse, tempTime));
+    _timelapseVector.push_back(timelapse);
 }
-std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> ThreadVector::getTimelapseVector()
+void ThreadVector::removeTimelapse(Poco::SharedPtr<Timer::Timelapse> timelapse)
+{
+    for (int i = 0; i < _timelapseVector.size(); i++) {
+        if (_timelapseVector[i] == timelapse) {
+            _timelapseVector.erase(_timelapseVector.begin() + i);
+            break;
+        }
+    }
+}
+std::vector<Poco::SharedPtr<Timer::Timelapse>> ThreadVector::getTimelapseVector()
 {
     return _timelapseVector;
 }

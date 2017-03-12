@@ -18,12 +18,12 @@
 class ThreadVector
 {
 public:
-    void addTimelapse(std::string, Poco::SharedPtr<Timer::Timelapse>);
-    //void removeTimelapse(int);
+    void addTimelapse(Poco::SharedPtr<Timer::Timelapse>);
+    void removeTimelapse(Poco::SharedPtr<Timer::Timelapse>);
     //Timer::Timelapse getTimelapse(int);
-    std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> getTimelapseVector();
+    std::vector<Poco::SharedPtr<Timer::Timelapse>> getTimelapseVector();
 private:
-    static std::vector<std::tuple<std::string, Poco::SharedPtr<Timer::Timelapse>, std::string>> _timelapseVector;
+    static std::vector<Poco::SharedPtr<Timer::Timelapse>> _timelapseVector;
 };
 
 
