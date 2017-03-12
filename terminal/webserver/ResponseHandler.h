@@ -14,7 +14,6 @@
 #include <Poco/Net/HTTPServerRequest.h>
 #include <Poco/Net/HTTPServerResponse.h>
 
-#include <Poco/Net/HTTPServerRequest.h>
 class ResponseHandler: public Poco::Net::HTTPRequestHandler
 {
 public:
