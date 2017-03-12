@@ -101,5 +101,3 @@ void Timer::Timelapse::setAndCreatePicPath()
     Poco::File filePicPath(_picPath);
     filePicPath.createDirectory();
 }
-
-
