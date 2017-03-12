@@ -108,9 +108,10 @@ void ResponseHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Poco:
         }
         Poco::SharedPtr<Timer::Timelapse>
             tempTimelapse(new Timer::Timelapse(start, intervalSnap * 1000, intervalCreate * 1000, "", FPS));
+        tempTimelapse->setName("webreq#" + std::to_string(request));
         tempTimelapse->start();
         request++;
-        threadVector.addTimelapse("webreq#" + std::to_string(request), tempTimelapse);
+        threadVector.addTimelapse(tempTimelapse);
 
         response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_OK);
         response.send();

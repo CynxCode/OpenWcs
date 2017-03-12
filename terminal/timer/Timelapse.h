@@ -15,6 +15,7 @@
 #include "Poco/Util/Timer.h"
 #include <iostream>
 #include "Poco/File.h"
+#include <string>
 
 namespace Timer
 {
@@ -24,6 +25,8 @@ public:
     Timelapse(int, int, int, std::string, int);
     void start();
     void stop();
+    void setName(std::string);
+    std::string getName();
 
 private:
     void createTimelapse(Poco::Util::TimerTask &task);
@@ -37,6 +40,7 @@ private:
     int _intervalSnap;
     int _intervalCreate;
     int _picNo = 0;
+    std::string _name;
     std::string _startDate;
     std::string _endDate;
 };

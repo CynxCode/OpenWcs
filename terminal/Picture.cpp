@@ -43,7 +43,6 @@ void Picture::echoIfVerbose(std::string msg)
 void Picture::save(std::string path, std::string name) //saves the picture
 {
     std::string imagename;
-
     if(_frame.empty())
         throw Poco::LogicException("Frame is empty!");
 
