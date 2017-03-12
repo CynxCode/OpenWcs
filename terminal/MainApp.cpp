@@ -178,6 +178,15 @@ void MainApp::processInternalCLIOptions(std::string input)
     std::string option = splitInput[0];
     if(option == "")
         return;
+    else if (option == "help") {
+        std::cout << "AVAILABLE OPTIONS:" << std::endl
+                  << "'timelapse [start] [intervalSnap] [intervalCreate] [FPS] [OPTIONAL:NAME]' - DESCRIPTION"
+                  << std::endl
+                  << "'picture' - Snaps a picture"
+                  << std::endl
+                  << "'exit' - closes the program"
+                  << std::endl;
+    }
     else if (option == "timelapse") {
         handleTimelapse(input);
     }
@@ -202,7 +211,7 @@ void MainApp::processInternalCLIOptions(std::string input)
             std::cerr << exc.displayText() << std::endl;
         }
     }
-    else if(option == "quit" || option == "exit")
+    else if (option == "quit" || option == "exit" || option == "close")
         _endExecution = true;
     else
         std::cout << "Unknown argument" << std::endl;
@@ -210,6 +219,19 @@ void MainApp::processInternalCLIOptions(std::string input)
 
 int MainApp::main(const ArgVec &args)
 {
+    std::cout << R"(
+   ____                 _       __
+  / __ \____  ___  ____| |     / /_________
+ / / / / __ \/ _ \/ __ \ | /| / / ___/ ___/
+/ /_/ / /_/ /  __/ / / / |/ |/ / /__(__  )
+\____/ .___/\___/_/ /_/|__/|__/\___/____/
+    /_/
+)"
+              << "Copyright 2017 by Kofler Lorenz and Papesh Konstantin"
+              << std::endl
+              << "Enter 'help' to see all available commands"
+              << std::endl
+              << std::endl;
     Poco::SharedPtr<HTTPServerApplication> httpServer;
     if (_enableWebInterface)
         httpServer = new HTTPServerApplication(9000);
