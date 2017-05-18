@@ -1,6 +1,7 @@
 # OpenWcs
+[![Stories in Ready](https://badge.waffle.io/CynxCode/OpenWcs.png?label=ready&title=Ready)](http://waffle.io/CynxCode/OpenWcs)
+---
 ![OpenWcs Logo](logo.png)
-
 Created by Konstantin Papesh ( @SydoxX ) & Lorenz Kofler ( @Ballonen )
 
 ## What's that?
