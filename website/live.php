@@ -39,7 +39,7 @@ if (!isset($_SESSION['login_user'])) {
     <div id="box">
       <div class="box-top">Webcam</div>
       <div class="box-panel">
-        <img src="http://<?=$_SERVER['SERVER_NAME']?>:9000/30" alt="Error connecting to Webcam! Is OpenWcs running propberly?" width="100%" style="max-height:70%;"/>
+        <img src="http://<?=$_SERVER['SERVER_NAME']?>:9000/30" alt="Error connecting to webcam! Is OpenWcs running properly?" width="100%" style="max-height:70%;"/>
       </div>
 
       <form a target="_blank" action="">
