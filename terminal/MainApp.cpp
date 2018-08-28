@@ -176,7 +176,7 @@ void MainApp::processInternalCLIOptions(std::string input)
 {
     Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
     std::string option = splitInput[0];
-    if(option == "")
+    if(option.empty())
         return;
     else if (option == "help") {
         std::cout << "AVAILABLE OPTIONS:" << std::endl
@@ -227,7 +227,7 @@ int MainApp::main(const ArgVec &args)
 \____/ .___/\___/_/ /_/|__/|__/\___/____/
     /_/
 )"
-              << "Copyright 2017 by Kofler Lorenz and Papesh Konstantin"
+              << "Copyright 2018 by Kofler Lorenz and Papesh Konstantin"
               << std::endl
               << "Enter 'help' to see all available commands"
               << std::endl
