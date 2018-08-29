@@ -13,11 +13,6 @@ class Video
 public:
     Video(std::string, int);
     void record(cv::Mat);
-    enum returnType
-    {
-        FAIL,
-        OK
-    };
 
 private:
     cv::VideoCapture _cap;

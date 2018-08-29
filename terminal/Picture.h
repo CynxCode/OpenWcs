@@ -25,11 +25,6 @@ public:
     void displayDate();
     void setVerbose(bool verbose);
     cv::Mat get();
-    enum returnType
-    {
-        FAIL,
-        OK
-    };
 
 private:
     void echoIfVerbose(std::string);

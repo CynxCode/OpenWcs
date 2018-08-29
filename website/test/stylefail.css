@@ -87,16 +87,6 @@ ul#nav li a.selected {
 }
 
 /*left box*/
-div#left {
-  margin-top: 10px;
-  float:left;
-  width:49%;
-  min-width: 300px;
-  overflow:hidden;
-  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-  border-radius: 10px 10px 10px 10px;
-  float: left;
-}
 
 /*right box */
 div#right {
@@ -106,7 +96,7 @@ div#right {
   width:49%;
   min-width: 300px;
   overflow:hidden;
-  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 3px 3px 5px 0 rgba(0,0,0,0.75);
   border-radius: 10px 10px 10px 10px;
 }
 /*only one box*/
@@ -117,23 +107,22 @@ div#box {
   width:75%;
   min-width: 300px;
   overflow:hidden;
-  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 3px 3px 5px 0 rgba(0,0,0,0.75);
   border-radius: 10px 10px 10px 10px;
 }
 
 .box-top {
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0 0;
   color: #fff;
-  text-shadow: 0px 0px 1px #000;
+  text-shadow: 0 0 1px #000;
   background-color: rgb(40,153,247);
-  padding: 5px;
-  padding-left: 15px;
+  padding: 5px 5px 5px 15px;
   font-weight: 300;
   font-size: 1.5em;
 }
 
 .box-panel {
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0 0 10px 10px;
   background-color: rgb(211,209,209);
   padding: 15px;
   margin-left: 10px;

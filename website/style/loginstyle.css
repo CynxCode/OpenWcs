@@ -19,8 +19,7 @@ body {
   text-align: center;
   background-color: rgb(211,209,209);
   border-radius: 10px;
-  margin: 0 auto;
-  margin-top: 60px;
+  margin: 60px auto 0;
   border:2px solid #000000;
 }
 
@@ -42,12 +41,6 @@ input[type="text"],[type="password"]{
   border-radius: 10px;
 }
 
-.form-input::before{
-  content: "";
-  position: absolute;
-  font-size: 30px;
-}
-
 .btn-login{
   margin-top: 20px;
   padding: 15px 25px;
@@ -56,5 +49,5 @@ input[type="text"],[type="password"]{
   border-radius: 10px;
   border: none;
   font-size: 20px;
-  border:2px solid #000000;r
+  border:2px solid #000000;
 }
