@@ -15,7 +15,7 @@ HTTPServerApplication::HTTPServerApplication(Poco::UInt16 port)
 {
     Poco::Net::ServerSocket socket(port);
 
-    Poco::Net::HTTPServerParams *pParams = new Poco::Net::HTTPServerParams();
+    auto *pParams = new Poco::Net::HTTPServerParams();
     pParams->setMaxQueued(100);
     pParams->setMaxThreads(16);
 

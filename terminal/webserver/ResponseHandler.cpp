@@ -18,7 +18,7 @@
 void ResponseHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response)
 {
     Poco::URI URI(request.getURI());
-    std::string Method = request.getMethod();
+    const std::string &Method = request.getMethod();
     if (URI.getPath() == "/30") {
         Poco::Net::MediaType mediaType("multipart/x-mixed-replace");
         mediaType.setParameter("boundary", "--boundary");
@@ -52,6 +52,7 @@ void ResponseHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Poco:
                 responseStream.write(reinterpret_cast<const char *>(buf.data()), buf.size());
             }
             //connectionAlive = Poco::Net::ICMPClient::pingIPv4(request.clientAddress(), 20);
+            //TODO: Check whenever client closes connection and set connectionAlive to FALSE
 
         }
         while (connectionAlive);
@@ -82,18 +83,18 @@ void ResponseHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Poco:
         int start = 0;
         int intervalSnap = 0;
         int intervalCreate = 0;
-        std::string path = "";
+        std::string path;
         int FPS = 0;
         Poco::URI::QueryParameters query = URI.getQueryParameters();
-        for (int i = 0; i < query.size(); i++) {
-            if (Poco::toLower(query[i].first) == "invsnap") {
-                intervalSnap = std::stoi(query[i].second);
+        for (auto &i : query) {
+            if (Poco::toLower(i.first) == "invsnap") {
+                intervalSnap = std::stoi(i.second);
             }
-            else if (Poco::toLower(query[i].first) == "invcreate") {
-                intervalCreate = std::stoi(query[i].second);
+            else if (Poco::toLower(i.first) == "invcreate") {
+                intervalCreate = std::stoi(i.second);
             }
-            else if (Poco::toLower(query[i].first) == "fps") {
-                FPS = std::stoi(query[i].second);
+            else if (Poco::toLower(i.first) == "fps") {
+                FPS = std::stoi(i.second);
             }
             else {
                 response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_BAD_REQUEST);

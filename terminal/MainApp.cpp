@@ -193,8 +193,8 @@ void MainApp::processInternalCLIOptions(std::string input)
     else if (option == "debug") {
         std::vector<Poco::SharedPtr<Timer::Timelapse>> tVector = threadVector.getTimelapseVector();
         std::cout << std::to_string(tVector.size());
-        for (int i = 0; i < tVector.size(); i++) {
-            std::cout << tVector[i]->getName();
+        for (auto x : tVector) {
+            std::cout << x->getName();
         }
     }
     else if (option == "picture") {

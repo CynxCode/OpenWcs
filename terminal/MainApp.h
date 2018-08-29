@@ -15,10 +15,10 @@ public:
     MainApp();
 
 protected:
-    void initialize(Poco::Util::Application &);
-    void uninitialize();
-    void reinitialize(Poco::Util::Application &);
-    void defineOptions(Poco::Util::OptionSet &);
+    void initialize(Poco::Util::Application &) override;
+    void uninitialize() override;
+    void reinitialize(Poco::Util::Application &) override;
+    void defineOptions(Poco::Util::OptionSet &) override;
     void handleHelp(const std::string &, const std::string &);
     void handleVersion(const std::string &, const std::string &);
     void handleSnapPicture(const std::string &, const std::string &);
@@ -28,7 +28,7 @@ protected:
     void displayHelp();
     void displayVersion();
     void processInternalCLIOptions(std::string);
-    int main(const ArgVec &);
+    int main(const ArgVec &) override;
 
 private:
     bool _endExecution;

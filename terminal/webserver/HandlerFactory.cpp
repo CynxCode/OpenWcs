@@ -11,9 +11,7 @@
 #include "ResponseHandler.h"
 
 HandlerFactory::HandlerFactory()
-{
-
-}
+= default;
 
 Poco::Net::HTTPRequestHandler *HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest &request)
 {

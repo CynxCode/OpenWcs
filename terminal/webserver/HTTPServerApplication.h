@@ -15,7 +15,7 @@
 class HTTPServerApplication
 {
 public:
-    HTTPServerApplication(Poco::UInt16);
+    explicit HTTPServerApplication(Poco::UInt16);
     ~HTTPServerApplication();
 private:
     Poco::SharedPtr<Poco::Net::HTTPServer> server;

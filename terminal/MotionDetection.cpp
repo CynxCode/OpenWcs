@@ -34,12 +34,7 @@ bool Timer::MotionDetection::_motionDetected() // = 1 if there is motion in the 
     cv::cvtColor(_result, _result, CV_RGB2GRAY);
     cv::threshold(_result, _result, 150, 255, CV_THRESH_BINARY);
 
-    if (cv::countNonZero(_result)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return cv::countNonZero(_result) != 0;
 }
 
 void Timer::MotionDetection::check()
