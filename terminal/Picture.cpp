@@ -16,21 +16,16 @@
 #include "Overlay.h"
 #include "Picture.h"
 #include "DateTimeString.h"
+#include "CameraHandler.h"
 
 Picture::Picture() //initializes the camera
-{
-
-    _cap  = 0; // open the default camera TODO: Choose Camera...
-    if(!_cap.isOpened())
-    {
-        throw Poco::ApplicationException("Camera could not be opened!");
-    }
-}
+= default;
 
 void Picture::snap() //makes a photo
 {
     echoIfVerbose("Snapping picture...");
-    _cap >> _frame;
+    static CameraHandler cameraHandler;
+    _frame = cameraHandler.getPic();
 }
 
 void Picture::echoIfVerbose(std::string msg)

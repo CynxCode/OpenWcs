@@ -33,7 +33,6 @@ public:
 
 private:
     void echoIfVerbose(std::string);
-    cv::VideoCapture _cap;
     cv::Mat _frame;
     bool verbose = false;
 };
