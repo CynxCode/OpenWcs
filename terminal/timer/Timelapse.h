@@ -27,6 +27,10 @@ public:
     void stop();
     void setName(std::string);
     std::string getName();
+    std::string getPath();
+    int getFPS();
+    int getIntervalSnap();
+    int getIntervalCreate();
 
 private:
     void createTimelapse(Poco::Util::TimerTask &task);

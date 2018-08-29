@@ -10,6 +10,7 @@
 
 #include "Picture.h"
 #include "webserver/HTTPServerApplication.h"
+#include "ConfigHandler.h"
 
 using Poco::Util::Application;
 using Poco::Util::Option;
@@ -196,6 +197,8 @@ void MainApp::processInternalCLIOptions(std::string input)
         for (auto x : tVector) {
             std::cout << x->getName();
         }
+        ConfigHandler configHandler;
+        configHandler.save();
     }
     else if (option == "picture") {
         try {

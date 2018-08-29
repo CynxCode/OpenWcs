@@ -43,14 +43,29 @@ void Timer::Timelapse::stop()
 {
     _timer.cancel(true);
 }
-void Timer::Timelapse::setName(std::string tName)
-{
+void Timer::Timelapse::setName(std::string tName) {
     this->_name = std::move(tName);
 }
-std::string Timer::Timelapse::getName()
-{
+std::string Timer::Timelapse::getName() {
     return this->_name;
 }
+
+std::string Timer::Timelapse::getPath() {
+    return this->_path;
+}
+
+int Timer::Timelapse::getFPS() {
+    return this->_FPS;
+}
+
+int Timer::Timelapse::getIntervalSnap() {
+    return this->_intervalSnap;
+}
+
+int Timer::Timelapse::getIntervalCreate(){
+    return this->_intervalCreate;
+}
+
 void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
 {
     static ThreadVector threadVector;
