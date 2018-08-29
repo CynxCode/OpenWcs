@@ -6,6 +6,7 @@
 #define OPENWCS_MOTIONDETECTION_H
 
 #include "Poco/Util/Timer.h"
+#include "opencv2/opencv.hpp"
 
 namespace Timer
 {
@@ -21,7 +22,6 @@ private:
     cv::Mat _current_frame;
     cv::Mat _result;
     cv::Mat _pic;
-    cv::VideoCapture _cap;
     bool _motionDetected();
     bool _motion;
     std::string _path;
