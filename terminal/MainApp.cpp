@@ -200,7 +200,7 @@ void MainApp::processInternalCLIOptions(std::string input)
         ConfigHandler configHandler;
         configHandler.save();
     }
-    else if (option == "picture") {
+    else if (option == "picture" || option == "snap") {
         try {
             Picture picture;
             picture.setVerbose(true);
