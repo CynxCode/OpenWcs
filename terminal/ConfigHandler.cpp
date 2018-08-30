@@ -35,7 +35,7 @@ void ConfigHandler::load(std::string file) {
     ThreadVector threadVector;
 
     json.load(file);
-    if(std::floor(json.getDouble("config.version")) > openwcs_VERSION_MAJOR) {
+    if(std::floor(json.getDouble("config.version")) > OPENWCS_VERSION_MAJOR) {
         std::cout << "Version mismatch!";
     } else {
         bool fail = false;
