@@ -7,7 +7,6 @@
 
 #include "Poco/Util/Application.h"
 #include "Poco/Util/HelpFormatter.h"
-#include "ThreadVector.h"
 
 class MainApp: public Poco::Util::Application
 {
@@ -33,7 +32,6 @@ protected:
 private:
     bool _endExecution;
     bool _enableWebInterface;
-    ThreadVector threadVector;
 };
 
 

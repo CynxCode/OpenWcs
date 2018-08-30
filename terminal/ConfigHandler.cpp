@@ -3,7 +3,9 @@
 //
 
 #include <fstream>
+
 #include "Poco/Util/JSONConfiguration.h"
+
 #include "ConfigHandler.h"
 #include "ThreadVector.h"
 #include "timer/Timelapse.h"
@@ -36,6 +38,25 @@ void ConfigHandler::load(std::string file) {
     if(std::floor(json.getDouble("config.version")) > openwcs_VERSION_MAJOR) {
         std::cout << "Version mismatch!";
     } else {
-        std::cout << json.getDouble("config.version") << " passt ziemlich gut mit " << openwcs_VERSION_MAJOR << "." << openwcs_VERSION_MINOR;
+        bool fail = false;
+        int i = 0;
+        while(!fail)
+        {
+            try {
+                std::string tName   = json.getString("config.timelapse[" + std::to_string(i) + "].name");
+                std::string tPath   = json.getString("config.timelapse[" + std::to_string(i) + "].path");
+                int tFPS            = json.getInt("config.timelapse[" + std::to_string(i) + "].fps");
+                int tIntervalSnap   = json.getInt("config.timelapse[" + std::to_string(i) + "].intervalsnap");
+                int tIntervalCreate = json.getInt("config.timelapse[" + std::to_string(i) + "].intervalcreate");
+                Poco::SharedPtr<Timer::Timelapse> tempTimelapse(new Timer::Timelapse(0, tIntervalSnap, tIntervalCreate, tPath, tFPS));
+                tempTimelapse->setName(tName);
+                tempTimelapse->start();
+                threadVector.addTimelapse(tempTimelapse);
+            } catch(Poco::NotFoundException) {
+                fail = true;
+            }
+            i++;
+        }
+
     }
 }

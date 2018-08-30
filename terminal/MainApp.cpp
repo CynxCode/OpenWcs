@@ -11,6 +11,7 @@
 #include "Picture.h"
 #include "webserver/HTTPServerApplication.h"
 #include "ConfigHandler.h"
+#include "ThreadVector.h"
 
 using Poco::Util::Application;
 using Poco::Util::Option;
@@ -116,6 +117,7 @@ void MainApp::handleSnapPicture(const std::string &name, const std::string &valu
 void MainApp::handleTimelapse(std::string input)
 {
     static int reqNr = 0;
+    ThreadVector threadVector;
     std::string name = "timelapse#" + std::to_string(reqNr);
 
     input = Poco::toLower(input);
@@ -175,6 +177,8 @@ void MainApp::displayVersion()
 
 void MainApp::processInternalCLIOptions(std::string input)
 {
+    ThreadVector threadVector;
+
     Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
     std::string option = splitInput[0];
     if(option.empty())
@@ -191,15 +195,15 @@ void MainApp::processInternalCLIOptions(std::string input)
     else if (option == "timelapse") {
         handleTimelapse(input);
     }
-    else if (option == "debug") {
-        std::vector<Poco::SharedPtr<Timer::Timelapse>> tVector = threadVector.getTimelapseVector();
-        std::cout << std::to_string(tVector.size());
-        for (auto x : tVector) {
-            std::cout << x->getName();
-        }
+    else if (option == "debug_save") {
         ConfigHandler configHandler;
         configHandler.save();
+        std::cout << "Saved!";
+    }
+    else if (option == "debug_load") {
+        ConfigHandler configHandler;
         configHandler.load();
+        std::cout << "Loaded!";
     }
     else if (option == "picture" || option == "snap") {
         try {
