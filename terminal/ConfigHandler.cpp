@@ -7,11 +7,12 @@
 #include "ConfigHandler.h"
 #include "ThreadVector.h"
 #include "timer/Timelapse.h"
+#include "Config.h"
 
-void ConfigHandler::save(std::string path) {
+void ConfigHandler::save(std::string file) {
     Poco::Util::JSONConfiguration json;
     ThreadVector threadVector;
-    std::ofstream outfile(path,std::ofstream::binary);
+    std::ofstream outfile(file,std::ofstream::binary);
 
     int i = 0;
     json.setDouble("config.version", 0.2);
@@ -26,4 +27,15 @@ void ConfigHandler::save(std::string path) {
     }
     json.save(outfile);
     outfile.close();
+}
+void ConfigHandler::load(std::string file) {
+    Poco::Util::JSONConfiguration json;
+    ThreadVector threadVector;
+
+    json.load(file);
+    if(std::floor(json.getDouble("config.version")) > openwcs_VERSION_MAJOR) {
+        std::cout << "Version mismatch!";
+    } else {
+        std::cout << json.getDouble("config.version") << " passt ziemlich gut mit " << openwcs_VERSION_MAJOR << "." << openwcs_VERSION_MINOR;
+    }
 }

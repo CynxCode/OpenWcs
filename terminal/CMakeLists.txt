@@ -1,10 +1,17 @@
 set(TARGET_NAME terminal)
 project(${TARGET_NAME})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+# set version number
+set (openwcs_VERSION_MAJOR 0)
+set (openwcs_VERSION_MINOR 2)
+set (openwcs_VERSION_PATCH 0)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(OPENCV opencv)
+# pass metadata to header
+configure_file(
+        "${PROJECT_SOURCE_DIR}/Config.h.in"
+        "${PROJECT_BINARY_DIR}/Config.h"
+)
+include_directories("${PROJECT_BINARY_DIR}")
 
 set(SOURCE_FILES main.cpp Overlay.cpp Picture.cpp DateTimeString.cpp Video.cpp MainApp.cpp timer/Timelapse.cpp MotionDetection.cpp ThreadVector.cpp webserver/HTTPServerApplication.cpp webserver/HTTPServerApplication.h webserver/HandlerFactory.cpp webserver/HandlerFactory.h webserver/ResponseHandler.cpp webserver/ResponseHandler.h mail.cpp mail.h CameraHandler.cpp CameraHandler.h ConfigHandler.cpp ConfigHandler.h)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin/)

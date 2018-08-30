@@ -1,0 +1,18 @@
+//
+//  Config.h
+//
+//  Created by the OpenWcs Team.
+//  Copyright 2018 OpenWcs.
+//
+// Distributed under GNU GPL, Version 3.0.
+// See the accompanying file LICENSE or http://www.gnu.org/licenses/.
+//
+#ifndef OPENWCS_CONFIG_H
+#define OPENWCS_CONFIG_H
+
+// the configured options and settings for Tutorial
+#define openwcs_VERSION_MAJOR @openwcs_VERSION_MAJOR@
+#define openwcs_VERSION_MINOR @openwcs_VERSION_MINOR@
+#define openwcs_VERSION_PATCH @openwcs_VERSION_PATCH@
+
+#endif //OPENWCS_CONFIG_H
