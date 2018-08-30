@@ -10,9 +10,8 @@
 
 class ConfigHandler {
 public:
-    void save(std::string path = ".config");
-    void load();
-    void load(std::string);
+    void save(std::string file = ".config");
+    void load(std::string file = ".config");
 private:
 
 };

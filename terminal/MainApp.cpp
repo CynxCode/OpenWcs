@@ -199,6 +199,7 @@ void MainApp::processInternalCLIOptions(std::string input)
         }
         ConfigHandler configHandler;
         configHandler.save();
+        configHandler.load();
     }
     else if (option == "picture" || option == "snap") {
         try {
