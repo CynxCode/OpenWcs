@@ -11,16 +11,15 @@
 #ifndef OPENWCS_CAMERAHANDLER_H
 #define OPENWCS_CAMERAHANDLER_H
 
+#include <memory>
 #include "opencv2/opencv.hpp"
+#include "camera.h"
 
 class CameraHandler {
 public:
-    CameraHandler();
-    cv::Mat getPic();
+    std::weak_ptr<Camera> getCamera(int index = 0);
 private:
-    cv::VideoCapture _cap;
-    static bool _inUse;
-    static cv::Mat _lastPic;
+    static std::vector<std::pair<int, std::shared_ptr<Camera>>> _capVect;
 };
 
 

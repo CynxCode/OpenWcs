@@ -12,22 +12,15 @@
 #include "opencv2/opencv.hpp"
 #include "Poco/Exception.h"
 
-bool CameraHandler::_inUse = false;
-cv::Mat CameraHandler::_lastPic = cv::Mat();
+std::vector<std::pair<int, std::shared_ptr<Camera>>> CameraHandler::_capVect{};
 
-CameraHandler::CameraHandler() {
-    if (!_inUse) {
-        _cap = 0; // open the default camera TODO: Choose Camera...
-        if (!_cap.isOpened()) {
-            throw Poco::ApplicationException("Camera could not be opened!");
-        }
+std::weak_ptr<Camera> CameraHandler::getCamera(int index) {
+    for (const auto &item : _capVect) {
+        if(item.first == index) // in use
+            return item.second;
     }
-}
-cv::Mat CameraHandler::getPic() {
-    if(!_inUse) {
-        _inUse = true;
-        _cap >> _lastPic;
-        _inUse = false;
-    }
-    return _lastPic;
+
+    std::shared_ptr<Camera> tCap = std::make_shared<Camera>(index);
+    _capVect.emplace_back(index, tCap);
+    return tCap;
 }

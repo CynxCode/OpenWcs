@@ -21,11 +21,14 @@
 Picture::Picture() //initializes the camera
 = default;
 
-void Picture::snap() //makes a photo
+void Picture::snap(int index)
 {
     echoIfVerbose("Snapping picture...");
-    static CameraHandler cameraHandler;
-    _frame = cameraHandler.getPic();
+    CameraHandler cameraHandler;
+    auto tCap = cameraHandler.getCamera(index);
+    if(auto tUnl = tCap.lock()){
+        _frame = tUnl->getPic();
+    }
 }
 
 void Picture::echoIfVerbose(std::string msg)

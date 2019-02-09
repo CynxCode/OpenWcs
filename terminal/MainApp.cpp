@@ -183,13 +183,14 @@ void MainApp::processInternalCLIOptions(std::string input)
 
     Poco::StringTokenizer splitInput(input, " ", Poco::StringTokenizer::TOK_IGNORE_EMPTY);
     std::string option = splitInput[0];
+    int camIndex = 0;
     if(option.empty())
         return;
     else if (option == "help") {
         std::cout << "AVAILABLE OPTIONS:" << std::endl
                   << "'timelapse [start] [intervalSnap] [intervalCreate] [FPS] [OPTIONAL:NAME]' - DESCRIPTION"
                   << std::endl
-                  << "'picture' - Snaps a picture"
+                  << "'snap' - Snaps a picture"
                   << std::endl
                   << "'exit' - closes the program"
                   << std::endl;
@@ -212,9 +213,14 @@ void MainApp::processInternalCLIOptions(std::string input)
             Picture picture;
             picture.setVerbose(true);
             usleep(500000); //TODO: anderen Befehl finden!
-            picture.snap();
-            picture.displayDate();
-            picture.save("", "");
+            if(splitInput.count() > 1) camIndex = std::stoi(splitInput[1]);
+            try {
+                picture.snap(camIndex);
+                picture.displayDate();
+                picture.save("", "");
+            } catch(Poco::LogicException &except) {
+                std::cerr << "Can't open camera! Is there one connected?" << std::endl;
+            }
         }
 
         catch (Poco::Exception &exc) {

@@ -20,7 +20,7 @@ class Picture
 
 public:
     Picture();
-    void snap();
+    void snap(int index = 0);
     void save(std::string, std::string);
     void displayDate();
     void setVerbose(bool verbose);
