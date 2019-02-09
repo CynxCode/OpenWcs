@@ -44,7 +44,7 @@ if (!isset($_SESSION['login_user'])) {
         <form>
           <p>Picture Interval[s]:</p>
           <p><input type="number" id="invsnap" name="invsnap" step="1" max="1000"></p>
-          <p>End Time[min]:</p>
+          <p>Duration[min]:</p>
           <p><input type="number" id="invcreate" name="invcreate" step="1" max="1000"</p>
           <p>FPS:</p>
           <p><input type="number" id="fps" name="fps" step="1" max="140"</p>
@@ -62,7 +62,7 @@ if (!isset($_SESSION['login_user'])) {
           <li><u>Picture Interval</u>:</li>
           Set the time (in seconds) between pictures.<br>
           <br>
-          <li><u>End Time</u>:</li>
+          <li><u>Duration</u>:</li>
           Set the time (in minutes) when the application should create the timelapse.<br>
           <br>
           <li><u>FPS</u>:</li>
