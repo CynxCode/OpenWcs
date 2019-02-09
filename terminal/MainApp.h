@@ -25,7 +25,7 @@ protected:
     void handleConfig(const std::string &, const std::string &);
     void handleWebInterface(const std::string &, const std::string &);
     void displayHelp();
-    void displayVersion();
+    void displayVersion(std::ostream&);
     void processInternalCLIOptions(std::string);
     int main(const ArgVec &) override;
 

@@ -10,6 +10,7 @@
 
 #include "Picture.h"
 #include "webserver/HTTPServerApplication.h"
+#include "Config.h"
 #include "ConfigHandler.h"
 #include "ThreadVector.h"
 
@@ -92,7 +93,8 @@ void MainApp::handleHelp(const std::string &name, const std::string &value)
 void MainApp::handleVersion(const std::string &name, const std::string &value)
 {
     _endExecution = true;
-    displayVersion();
+    displayVersion(std::cout);
+    std::cout << std::endl;
     stopOptionsProcessing();
 }
 
@@ -170,9 +172,9 @@ void MainApp::displayHelp()
     helpFormatter.format(std::cout);
 }
 
-void MainApp::displayVersion()
+void MainApp::displayVersion(std::ostream &stream)
 {
-    std::cout << "OpenWcs v0.1-dev" << std::endl;
+    stream << "OpenWcs v" << OPENWCS_VERSION_MAJOR << "." << OPENWCS_VERSION_MINOR << "." << OPENWCS_VERSION_PATCH;
 }
 
 void MainApp::processInternalCLIOptions(std::string input)
@@ -227,15 +229,9 @@ void MainApp::processInternalCLIOptions(std::string input)
 
 int MainApp::main(const ArgVec &args)
 {
-    std::cout << R"(
-   ____                 _       __
-  / __ \____  ___  ____| |     / /_________
- / / / / __ \/ _ \/ __ \ | /| / / ___/ ___/
-/ /_/ / /_/ /  __/ / / / |/ |/ / /__(__  )
-\____/ .___/\___/_/ /_/|__/|__/\___/____/
-    /_/
-)"
-              << "Copyright 2018 by Kofler Lorenz and Papesh Konstantin"
+    displayVersion(std::cout);
+    std::cout << std::endl;
+    std::cout << OPENWCS_COPYRIGHT_YEAR << " by Kofler Lorenz and Papesh Konstantin"
               << std::endl
               << "Enter 'help' to see all available commands"
               << std::endl

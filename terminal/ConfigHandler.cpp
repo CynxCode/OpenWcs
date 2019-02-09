@@ -10,6 +10,7 @@
 #include "ThreadVector.h"
 #include "timer/Timelapse.h"
 #include "Config.h"
+#include "../cmake-build-debug/terminal/Config.h"
 
 void ConfigHandler::save(std::string file) {
     Poco::Util::JSONConfiguration json;
@@ -52,7 +53,7 @@ void ConfigHandler::load(std::string file) {
                 tempTimelapse->setName(tName);
                 tempTimelapse->start();
                 threadVector.addTimelapse(tempTimelapse);
-            } catch(Poco::NotFoundException) {
+            } catch(Poco::NotFoundException &exception) {
                 fail = true;
             }
             i++;

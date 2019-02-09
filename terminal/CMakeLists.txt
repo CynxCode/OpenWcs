@@ -5,6 +5,7 @@ project(${TARGET_NAME})
 set (openwcs_VERSION_MAJOR 0)
 set (openwcs_VERSION_MINOR 2)
 set (openwcs_VERSION_PATCH 0)
+set (openwcs_COPYRIGHT_YEAR 2019)
 
 # pass metadata to header
 configure_file(

@@ -10,9 +10,9 @@
 #ifndef OPENWCS_CONFIG_H
 #define OPENWCS_CONFIG_H
 
-// the configured options and settings for Tutorial
 #define OPENWCS_VERSION_MAJOR @openwcs_VERSION_MAJOR@
 #define OPENWCS_VERSION_MINOR @openwcs_VERSION_MINOR@
 #define OPENWCS_VERSION_PATCH @openwcs_VERSION_PATCH@
+#define OPENWCS_COPYRIGHT_YEAR @openwcs_COPYRIGHT_YEAR@
 
 #endif //OPENWCS_CONFIG_H
