@@ -210,12 +210,12 @@ void MainApp::processInternalCLIOptions(std::string input)
     }
     else if (option == "picture" || option == "snap") {
         try {
-            Picture picture;
+            if(splitInput.count() > 1) camIndex = std::stoi(splitInput[1]);
+            Picture picture(camIndex);
             picture.setVerbose(true);
             usleep(500000); //TODO: anderen Befehl finden!
-            if(splitInput.count() > 1) camIndex = std::stoi(splitInput[1]);
             try {
-                picture.snap(camIndex);
+                picture.snap();
                 picture.displayDate();
                 picture.save("", "");
             } catch(Poco::LogicException &except) {

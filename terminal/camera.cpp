@@ -4,12 +4,17 @@
 
 #include "camera.h"
 
-Camera::Camera(int index) : _index{index} {}
+Camera::Camera(int index) : _index{index} {
+    _cap.open(_index);
+}
+
+Camera::~Camera(){
+    _cap.release();
+}
 
 cv::Mat Camera::getPic() {
-    _cap.open(_index);
     _cap.grab();
     _cap.retrieve(_lastPic);
-    _cap.release();
     return _lastPic;
 }
+

@@ -12,12 +12,19 @@
 #include "opencv2/opencv.hpp"
 #include "Poco/Exception.h"
 
-std::vector<std::pair<int, std::shared_ptr<Camera>>> CameraHandler::_capVect{};
+std::list<std::pair<int, std::weak_ptr<Camera>>> CameraHandler::_capVect{};
 
-std::weak_ptr<Camera> CameraHandler::getCamera(int index) {
-    for (const auto &item : _capVect) {
-        if(item.first == index) // in use
-            return item.second;
+std::shared_ptr<Camera> CameraHandler::getCamera(int index) {
+    for (auto &item : _capVect) {
+        if(item.first == index) { // in use
+            if (item.second.expired()) {
+                std::shared_ptr<Camera> tCap = std::make_shared<Camera>(index);
+                item.second = tCap;
+                return tCap;
+            } else {
+                return item.second.lock();
+            }
+        }
     }
 
     std::shared_ptr<Camera> tCap = std::make_shared<Camera>(index);

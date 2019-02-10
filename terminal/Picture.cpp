@@ -18,22 +18,20 @@
 #include "DateTimeString.h"
 #include "CameraHandler.h"
 
-Picture::Picture() //initializes the camera
-= default;
+Picture::Picture(int index) : _index{index}{
+    CameraHandler cameraHandler;
+    _cap = cameraHandler.getCamera(_index);
+}
 
-void Picture::snap(int index)
+void Picture::snap()
 {
     echoIfVerbose("Snapping picture...");
-    CameraHandler cameraHandler;
-    auto tCap = cameraHandler.getCamera(index);
-    if(auto tUnl = tCap.lock()){
-        _frame = tUnl->getPic();
-    }
+        _frame = _cap->getPic();
 }
 
 void Picture::echoIfVerbose(std::string msg)
 {
-    if (verbose) {
+    if (_verbose) {
         std::cout << msg << std::endl;
     }
 }
@@ -64,7 +62,7 @@ void Picture::displayDate() //enables displaying the date on the picture
 
 void Picture::setVerbose(bool verbose) //Echos steps to the console
 {
-    this->verbose = verbose;
+    this->_verbose = verbose;
 }
 
 cv::Mat Picture::get() 

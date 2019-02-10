@@ -11,7 +11,8 @@
 
 class Camera {
 public:
-    Camera(int index);
+    explicit Camera(int index);
+    ~Camera();
     cv::Mat getPic();
 
 private:

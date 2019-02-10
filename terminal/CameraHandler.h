@@ -17,9 +17,10 @@
 
 class CameraHandler {
 public:
-    std::weak_ptr<Camera> getCamera(int index = 0);
+    std::shared_ptr<Camera> getCamera(int index = 0);
+    void removeCamera(int index);
 private:
-    static std::vector<std::pair<int, std::shared_ptr<Camera>>> _capVect;
+    static std::list<std::pair<int, std::weak_ptr<Camera>>> _capVect;
 };
 
 

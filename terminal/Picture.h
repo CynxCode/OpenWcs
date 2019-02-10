@@ -12,15 +12,18 @@
 #ifndef Picture_h
 #define Picture_h
 
-#include "opencv2/opencv.hpp"
+#include <memory>
+#include <opencv2/opencv.hpp>
+
+#include "camera.h"
 
 // Declaration of Picture class
 class Picture
 {
 
 public:
-    Picture();
-    void snap(int index = 0);
+    Picture(int index = 0);
+    void snap();
     void save(std::string, std::string);
     void displayDate();
     void setVerbose(bool verbose);
@@ -29,7 +32,9 @@ public:
 private:
     void echoIfVerbose(std::string);
     cv::Mat _frame;
-    bool verbose = false;
+    bool _verbose = false;
+    int _index;
+    std::shared_ptr<Camera> _cap;
 };
 
 #endif /* Picture_h */
