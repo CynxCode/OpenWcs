@@ -15,15 +15,13 @@
 #include <iostream>
 #include "DateTimeString.h"
 
-class ThreadVector
-{
-public:
-    void addTimelapse(Poco::SharedPtr<Timer::Timelapse>);
-    void removeTimelapse(Poco::SharedPtr<Timer::Timelapse>);
-    //Timer::Timelapse getTimelapse(int);
-    std::vector<Poco::SharedPtr<Timer::Timelapse>> getTimelapseVector();
-private:
-    static std::vector<Poco::SharedPtr<Timer::Timelapse>> _timelapseVector;
+class ThreadVector {
+ public:
+  static void addTimelapse(const Poco::SharedPtr<Timer::Timelapse> &);
+  static void removeTimelapse(const Poco::SharedPtr<Timer::Timelapse> &);
+  static std::vector<Poco::SharedPtr<Timer::Timelapse>> getTimelapseVector();
+ private:
+  static std::vector<Poco::SharedPtr<Timer::Timelapse>> _timelapseVector;
 };
 
 

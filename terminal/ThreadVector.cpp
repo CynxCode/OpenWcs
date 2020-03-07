@@ -13,17 +13,17 @@
 
 std::vector<Poco::SharedPtr<Timer::Timelapse>> ThreadVector::_timelapseVector;
 
-void ThreadVector::addTimelapse(Poco::SharedPtr<Timer::Timelapse> timelapse) {
-    _timelapseVector.push_back(timelapse);
+void ThreadVector::addTimelapse(const Poco::SharedPtr<Timer::Timelapse> &timelapse) {
+  _timelapseVector.push_back(timelapse);
 }
 
-void ThreadVector::removeTimelapse(Poco::SharedPtr<Timer::Timelapse> timelapse) {
-    for (int i = 0; i < _timelapseVector.size(); i++) {
-        if (_timelapseVector[i] == timelapse) {
-            _timelapseVector.erase(_timelapseVector.begin() + i);
-            break;
-        }
+void ThreadVector::removeTimelapse(const Poco::SharedPtr<Timer::Timelapse> &timelapse) {
+  for (int i = 0; i < _timelapseVector.size(); i++) {
+    if (_timelapseVector[i] == timelapse) {
+      _timelapseVector.erase(_timelapseVector.begin() + i);
+      break;
     }
+  }
 }
 
 std::vector<Poco::SharedPtr<Timer::Timelapse>> ThreadVector::getTimelapseVector() {

@@ -7,14 +7,13 @@
 
 #include <iostream>
 
-class DateTimeString
-{
-public:
-    std::string getISO(bool, bool);
-    std::string getFancy();
+class DateTimeString {
+ public:
+  static std::string getISO(bool, bool);
+  static std::string getFancy();
 
-private:
-    std::string _getFormattedTime(std::string, bool);
+ private:
+  static std::string _getFormattedTime(const std::string &, bool);
 };
 
 

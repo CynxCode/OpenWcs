@@ -16,11 +16,11 @@
 #include "camera.h"
 
 class CameraHandler {
-public:
-    std::shared_ptr<Camera> getCamera(int index = 0);
-    void removeCamera(int index);
-private:
-    static std::list<std::pair<int, std::weak_ptr<Camera>>> _capVect;
+ public:
+  static std::shared_ptr<Camera> getCamera(int index = 0);
+  void removeCamera(int index);
+ private:
+  static std::list<std::pair<int, std::weak_ptr<Camera>>> _capVect;
 };
 
 

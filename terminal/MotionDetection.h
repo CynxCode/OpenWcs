@@ -10,22 +10,18 @@
 
 namespace Timer
 {
-class MotionDetection
-{
-public:
-    MotionDetection();
-    void check();
+class MotionDetection {
+ public:
+  MotionDetection();
+  void check();
 
-
-private:
-    cv::Mat _prev_frame;
-    cv::Mat _current_frame;
-    cv::Mat _result;
-    cv::Mat _pic;
-    bool _motionDetected();
-    bool _motion;
-    std::string _path;
-    std::string _picPath;
+ private:
+  cv::Mat _prev_frame;
+  cv::Mat _current_frame;
+  cv::Mat _result;
+  bool _motionDetected();
+  std::string _path;
+  std::string _picPath;
 
 };
 }

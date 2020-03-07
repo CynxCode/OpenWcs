@@ -9,10 +9,10 @@
 #include <string>
 
 class ConfigHandler {
-public:
-    void save(std::string file = ".config");
-    void load(std::string file = ".config");
-private:
+ public:
+  static void save(const std::string &file = ".config");
+  static void load(const std::string &file = ".config");
+ private:
 
 };
 

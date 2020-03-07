@@ -54,23 +54,23 @@ std::string Timer::Timelapse::getPath() {
     return this->_path;
 }
 
-int Timer::Timelapse::getFPS() {
-    return this->_FPS;
+int Timer::Timelapse::getFPS() const {
+  return this->_FPS;
 }
 
-int Timer::Timelapse::getIntervalSnap() {
-    return this->_intervalSnap;
+int Timer::Timelapse::getIntervalSnap() const {
+  return this->_intervalSnap;
 }
 
-int Timer::Timelapse::getIntervalCreate(){
-    return this->_intervalCreate;
+int Timer::Timelapse::getIntervalCreate() const {
+  return this->_intervalCreate;
 }
 
 void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
 {
     static ThreadVector threadVector;
     DateTimeString getEndDate;
-    _endDate = getEndDate.getISO(true,true);
+  _endDate = DateTimeString::getISO(true, true);
 
     cv::Mat _frame;
     cv::VideoWriter _videoWriter;
@@ -83,18 +83,17 @@ void Timer::Timelapse::createTimelapse(Poco::Util::TimerTask &task)
 
     _frame = cv::imread(_picPath + "0" + ".jpg");
     cv::Size frameSize( _frame.cols, _frame.rows);
-    _videoWriter.open(fullPathVid, FCC, _FPS, frameSize,true);
+  _videoWriter.open(fullPathVid, FCC, _FPS, frameSize, true);
 
-    for (int i = 0; i < _picNo; i++)
-    {
-        _frame = cv::imread(_picPath + std::to_string(i) + ".jpg");
-        _videoWriter.write(_frame);
-    }
+  for (int i = 0; i < _picNo; i++) {
+    _frame = cv::imread(_picPath + std::to_string(i) + ".jpg");
+    _videoWriter.write(_frame);
+  }
 
-    Poco::File delPath(_path + ".pictures");
-    delPath.remove(true);  //removes .pictures Folder
-    threadVector.removeTimelapse(this);
-    stop(); //stops timer
+  Poco::File delPath(_path + ".pictures");
+  delPath.remove(true);  //removes .pictures Folder
+  ThreadVector::removeTimelapse(this);
+  stop(); //stops timer
 }
 void Timer::Timelapse::snapPicture(Poco::Util::TimerTask &task)
 {

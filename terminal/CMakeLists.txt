@@ -2,10 +2,10 @@ set(TARGET_NAME terminal)
 project(${TARGET_NAME})
 
 # set version number
-set (openwcs_VERSION_MAJOR 0)
-set (openwcs_VERSION_MINOR 2)
-set (openwcs_VERSION_PATCH 0)
-set (openwcs_COPYRIGHT_YEAR 2019)
+set(openwcs_VERSION_MAJOR 0)
+set(openwcs_VERSION_MINOR 2)
+set(openwcs_VERSION_PATCH 0)
+set(openwcs_COPYRIGHT_YEAR 2020)
 
 # pass metadata to header
 configure_file(
@@ -15,7 +15,6 @@ configure_file(
 include_directories("${PROJECT_BINARY_DIR}")
 
 set(SOURCE_FILES main.cpp Overlay.cpp Picture.cpp DateTimeString.cpp Video.cpp MainApp.cpp timer/Timelapse.cpp MotionDetection.cpp ThreadVector.cpp webserver/HTTPServerApplication.cpp webserver/HTTPServerApplication.h webserver/HandlerFactory.cpp webserver/HandlerFactory.h webserver/ResponseHandler.cpp webserver/ResponseHandler.h mail.cpp mail.h CameraHandler.cpp CameraHandler.h ConfigHandler.cpp ConfigHandler.h camera.cpp camera.h webserver/WSResponseHandler.cpp webserver/WSResponseHandler.h)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin/)
 add_executable(${TARGET_NAME} ${SOURCE_FILES})
 add_compile_options(-pthread)
 target_include_directories(${TARGET_NAME} PRIVATE ${Poco_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})

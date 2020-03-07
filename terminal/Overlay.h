@@ -17,10 +17,7 @@
 class Overlay
 {
 public:
-    void putDateOnPicture(cv::Mat);
-
-private:
-
+    static void putDateOnPicture(cv::Mat);
 };
 
 

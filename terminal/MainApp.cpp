@@ -104,7 +104,6 @@ void MainApp::handleSnapPicture(const std::string &name, const std::string &valu
 
     try {
         Picture picture;
-        usleep(500000); //TODO: anderen Befehl finden!
         picture.snap();
         picture.displayDate();
         picture.save(value, "");
@@ -213,7 +212,6 @@ void MainApp::processInternalCLIOptions(std::string input)
             if(splitInput.count() > 1) camIndex = std::stoi(splitInput[1]);
             Picture picture(camIndex);
             picture.setVerbose(true);
-            usleep(500000); //TODO: anderen Befehl finden!
             try {
                 picture.snap();
                 picture.displayDate();
@@ -235,21 +233,22 @@ void MainApp::processInternalCLIOptions(std::string input)
 
 int MainApp::main(const ArgVec &args)
 {
-    displayVersion(std::cout);
-    std::cout << std::endl;
-    std::cout << OPENWCS_COPYRIGHT_YEAR << " by Kofler Lorenz and Papesh Konstantin"
-              << std::endl
-              << "Enter 'help' to see all available commands"
-              << std::endl
-              << std::endl;
-    Poco::SharedPtr<HTTPServerApplication> httpServer;
-    if (_enableWebInterface)
-        httpServer = new HTTPServerApplication(9000);
-    while (!_endExecution) {
-        std::string input;
-        std::cout << "openwcs>";
-        getline(std::cin, input);
-        processInternalCLIOptions(input);
-    }
-    return Application::EXIT_OK;
+  displayVersion(std::cout);
+  std::cout << std::endl;
+  std::cout << OPENWCS_COPYRIGHT_YEAR << " by Kofler Lorenz and Papesh Konstantin"
+            << std::endl
+            << "Enter 'help' to see all available commands"
+            << std::endl
+            << std::endl;
+  Poco::SharedPtr<HTTPServerApplication> httpServer;
+  if (_enableWebInterface)
+    httpServer = new HTTPServerApplication(9000);
+  while (!_endExecution) {
+    std::string input;
+    std::cout << "openwcs>";
+    getline(std::cin, input);
+    processInternalCLIOptions(input);
+  }
+
+  return Application::EXIT_OK;
 }

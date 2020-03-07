@@ -19,34 +19,33 @@
 
 namespace Timer
 {
-class Timelapse
-{
-public:
-    Timelapse(int, int, int, std::string, int);
-    void start();
-    void stop();
-    void setName(std::string);
-    std::string getName();
-    std::string getPath();
-    int getFPS();
-    int getIntervalSnap();
-    int getIntervalCreate();
+class Timelapse {
+ public:
+  Timelapse(int, int, int, std::string, int);
+  void start();
+  void stop();
+  void setName(std::string);
+  std::string getName();
+  std::string getPath();
+  int getFPS() const;
+  int getIntervalSnap() const;
+  int getIntervalCreate() const;
 
-private:
-    void createTimelapse(Poco::Util::TimerTask &task);
-    void snapPicture(Poco::Util::TimerTask &task);
-    void setAndCreatePicPath();
-    Poco::Util::Timer _timer;
-    std::string _path;
-    std::string _picPath;
-    int _FPS;
-    int _startTime;
-    int _intervalSnap;
-    int _intervalCreate;
-    int _picNo = 0;
-    std::string _name;
-    std::string _startDate;
-    std::string _endDate;
+ private:
+  void createTimelapse(Poco::Util::TimerTask &task);
+  void snapPicture(Poco::Util::TimerTask &task);
+  void setAndCreatePicPath();
+  Poco::Util::Timer _timer;
+  std::string _path;
+  std::string _picPath;
+  int _FPS;
+  int _startTime;
+  int _intervalSnap;
+  int _intervalCreate;
+  int _picNo = 0;
+  std::string _name;
+  std::string _startDate;
+  std::string _endDate;
 };
 }
 #endif /* Timelapse_h */

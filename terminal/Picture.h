@@ -24,13 +24,13 @@ class Picture
 public:
     Picture(int index = 0);
     void snap();
-    void save(std::string, std::string);
-    void displayDate();
+  void save(const std::string &, std::string);
+  void displayDate();
     void setVerbose(bool verbose);
     cv::Mat get();
 
 private:
-    void echoIfVerbose(std::string);
+  void echoIfVerbose(const std::string &) const;
     cv::Mat _frame;
     bool _verbose = false;
     int _index;

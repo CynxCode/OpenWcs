@@ -10,6 +10,7 @@
 //
 
 
+#include <thread>
 #include "opencv2/opencv.hpp"
 #include "Poco/Exception.h"
 
@@ -20,33 +21,32 @@
 
 Picture::Picture(int index) : _index{index}{
     CameraHandler cameraHandler;
-    _cap = cameraHandler.getCamera(_index);
+  _cap = CameraHandler::getCamera(_index);
 }
 
-void Picture::snap()
-{
-    echoIfVerbose("Snapping picture...");
-        _frame = _cap->getPic();
+void Picture::snap() {
+  std::this_thread::sleep_for(std::chrono::milliseconds(500)); //to start camera
+  echoIfVerbose("Snapping picture...");
+  _frame = _cap->getPic();
 }
 
-void Picture::echoIfVerbose(std::string msg)
-{
-    if (_verbose) {
-        std::cout << msg << std::endl;
-    }
+void Picture::echoIfVerbose(const std::string &msg) const {
+  if (_verbose) {
+    std::cout << msg << std::endl;
+  }
 }
 
-void Picture::save(std::string path, std::string name) //saves the picture
+void Picture::save(const std::string &path, std::string name) //saves the picture
 {
-    std::string imagename;
-    if(_frame.empty())
-        throw Poco::LogicException("Frame is empty!");
+  std::string imagename;
+  if (_frame.empty())
+    throw Poco::LogicException("Frame is empty!");
 
-    if (name.empty()) {
-        DateTimeString dateTimeString;
-        name = dateTimeString.getISO(true, true);
-        imagename = path + "IMG_" + name + ".jpg";
-    }
+  if (name.empty()) {
+    DateTimeString dateTimeString;
+    name = DateTimeString::getISO(true, true);
+    imagename = path + "IMG_" + name + ".jpg";
+  }
     else{
         imagename = path + name + ".jpg";
     }
@@ -57,7 +57,7 @@ void Picture::save(std::string path, std::string name) //saves the picture
 void Picture::displayDate() //enables displaying the date on the picture
 {
     Overlay overlay;
-    overlay.putDateOnPicture(_frame);
+  Overlay::putDateOnPicture(_frame);
 }
 
 void Picture::setVerbose(bool verbose) //Echos steps to the console
