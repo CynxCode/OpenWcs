@@ -16,10 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: Dovyski/setup-opencv-action@v1
-      with:
-        opencv-version: '4.0.0'
-
     - name: Build Poco
       shell: bash
       run: |
@@ -29,6 +25,10 @@ jobs:
         cd cmake-build
         cmake ..
         cmake --build . --config $BUILD_TYPE --target install
+        
+    - uses: Dovyski/setup-opencv-action@v1
+      with:
+        opencv-version: '4.0.0'
       
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
