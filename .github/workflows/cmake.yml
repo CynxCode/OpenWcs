@@ -22,7 +22,8 @@ jobs:
 
     - name: Build Poco
       shell: bash
-      run: git clone -b master https://github.com/pocoproject/poco.git
+      run: |
+        git clone -b master https://github.com/pocoproject/poco.git
         cd poco
         mkdir cmake-build
         cd cmake-build
