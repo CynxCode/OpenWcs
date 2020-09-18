@@ -29,16 +29,13 @@ install(TARGETS terminal EXPORT MyLibraryConfig
 
 # build a CPack driven installer package
 include(InstallRequiredSystemLibraries)
-set (CPACK_RESOURCE_FILE_LICENSE
-        "../LICENSE")
+set (CPACK_RESOURCE_FILE_LICENSE "LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${openwcs_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${openwcs_VERSION_MINOR}")
 set(CPACK_PACKAGE_VENDOR "OpenWcs")
-set(CPACK_RESOURCE_FILE_README
-        "../README.md")
+set(CPACK_RESOURCE_FILE_README "README.md")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A webcam software")
-set(CPACK_PACKAGE_ICON
-        "../logo.png")
+set(CPACK_PACKAGE_ICON "logo.png")
 #set(CPACK_GENERATOR  "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Konstantin Papesh")
 include(CPack)
