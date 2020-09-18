@@ -23,8 +23,7 @@ jobs:
         cd poco
         mkdir cmake-build
         cd cmake-build
-        cmake ..
-        cmake -H${{runner.workspace}}/poco -B${{runner.workspace}}/poco/cmake-build -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_NETSSL=OFF -DENABLE_CRYPTO=OFF -DENABLE_DATA=OFF -DENABLE_MONGODB=OFF -DENABLE_REDIS=OFF -DENABLE_PDF=OFF -DENABLE_ZIP=OFF 
+        cmake .. -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_NETSSL=OFF -DENABLE_CRYPTO=OFF -DENABLE_DATA=OFF -DENABLE_MONGODB=OFF -DENABLE_REDIS=OFF -DENABLE_PDF=OFF -DENABLE_ZIP=OFF 
         cmake --build . --config $BUILD_TYPE --target install
         
     - uses: Dovyski/setup-opencv-action@v1
